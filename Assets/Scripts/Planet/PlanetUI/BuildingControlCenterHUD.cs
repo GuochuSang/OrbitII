@@ -26,11 +26,14 @@ public class BuildingControlCenterHUD : MonoBehaviour
     RectTransform rect;
     void Start()
     {
+        transform.parent.parent.localPosition = Vector3.zero;
+        transform.parent.parent.localRotation = Quaternion.identity;
+        transform.parent.parent.localScale = Vector3.one;
         mat = GetComponent<Image>().material;
         rect = GetComponent<RectTransform>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Vector2 screenPos = Camera.main.WorldToScreenPoint(parentTrans.position);
         rect.anchoredPosition = screenPos + new Vector2(deltaPos.x, deltaPos.y);

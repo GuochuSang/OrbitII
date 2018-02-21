@@ -19,6 +19,7 @@ namespace Manager
             DontDestroyOnLoad(gameObject);// Dont Destroy 只对根对象有效
             var mainManager = Instance;
 
+            var poolManager = PoolManager.Instance;//对象池
             var eventManager = EventManager.Instance;//事件管理
             var audioManager = AudioManager.Instance;//音频管理
             var saveManager = SaveManager.Instance;//储存管理
@@ -32,7 +33,7 @@ namespace Manager
             managerList.Add(EventManager.Instance.gameObject);
             managerList.Add(SaveManager.Instance.gameObject);
             managerList.Add(AudioManager.Instance.gameObject);
-
+            managerList.Add(PoolManager.Instance.gameObject);
 
             foreach (GameObject manager in managerList)
                 manager.transform.SetParent(this.gameObject.transform);

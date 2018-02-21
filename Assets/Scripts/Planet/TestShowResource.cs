@@ -10,20 +10,27 @@ namespace Universe
         public Text text;
         public Planet curPlanet;
         public bool isOpen = false;
-    	void Update () 
+        void OnEnable()
         {
-            if (PlanetUI.Instance.CurrentPlanet != null)
+            StartCoroutine(UpdateText());
+        }
+        IEnumerator UpdateText()
+        {
+            while (true)
             {
-                curPlanet = PlanetUI.Instance.CurrentPlanet;
-                Open();
+                if (PlanetUI.Instance.CurrentPlanet != null)
+                {
+                    curPlanet = PlanetUI.Instance.CurrentPlanet;
+                    Open();
+                }
+                else
+                    Close();
+                yield return new WaitForSeconds(3f);
             }
-            else
-                Close();
     	}
         void Open()
         {
-            if (isOpen)
-                return;
+            isOpen = true;
             text.text = "";
             foreach (var kv in curPlanet.resources.elementInLands)
             {
@@ -38,6 +45,7 @@ namespace Universe
         {
             if (!isOpen)
                 return;
+            isOpen = false;
             text.text = "";
         }
     }

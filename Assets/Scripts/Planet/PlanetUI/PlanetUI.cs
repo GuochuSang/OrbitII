@@ -176,7 +176,7 @@ namespace Universe
         {
             if (currentPlanet.colony != null)
                 return;
-            Instantiate<GameObject>(buildControlCenterHUDPrefab, currentShip);
+            PoolManager.Instance.GetCacheGameObejct(buildControlCenterHUDPrefab).transform.SetParent(currentShip);
         }
         /// <summary>
         /// 由其他地方计算时间, 这里直接负责修建特技
@@ -254,23 +254,17 @@ namespace Universe
         /// <summary>
         /// 默认打开当前Building
         /// </summary>
-        public void Open(BuildingBase building = null)
+        public void Open()
         {
-            if (building == null)
-                building = currentBuilding;
-            BuildingUI.Instance.Open(building);
+            BuildingUI.Instance.Open(currentBuilding);
         }
-        public void Upgrade(BuildingBase building = null)
+        public void Upgrade()
         {
-            if (building == null)
-                building = currentBuilding;
-            BuildingUI.Instance.Upgrade(building);
+            BuildingUI.Instance.Upgrade(currentBuilding);
         }
-        public void Recycle(BuildingBase building = null)
+        public void Recycle()
         {
-            if (building == null)
-                building = currentBuilding;
-            BuildingUI.Instance.Recycle(building);
+            BuildingUI.Instance.Recycle(currentBuilding);
         }
     }
 }

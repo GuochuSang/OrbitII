@@ -94,6 +94,8 @@ namespace Universe
         #region 生命周期 Awake|OnDestroy
         void Awake()
         {
+            gameObject.layer = LayerMask.NameToLayer("Planet");
+            gameObject.tag = "Planet";
             if (landSprites == null || landSprites.Length == 0)
                 LoadResources();
             GenerateRoot();

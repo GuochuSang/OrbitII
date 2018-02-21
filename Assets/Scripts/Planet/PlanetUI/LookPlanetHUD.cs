@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Manager;
 namespace Universe 
 {
 public class LookPlanetHUD : MonoBehaviour {
@@ -10,13 +11,13 @@ public class LookPlanetHUD : MonoBehaviour {
     {
         if (PlanetUI.Instance.watchState != PlanetUI.WatchState.HALF_FREE)
         {
-            Destroy(this.gameObject);
+            PoolManager.Instance.ReturnCacheGameObejct(this.gameObject);
             return;
         }
         if (Input.GetKeyDown(key))
         {
             PlanetUI.Instance.LookPlanet();
-            Destroy(this.gameObject);
+            PoolManager.Instance.ReturnCacheGameObejct(this.gameObject);
         }
 	}
 }

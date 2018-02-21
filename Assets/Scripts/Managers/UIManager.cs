@@ -90,7 +90,7 @@ namespace Manager
         /// </summary>
         public void SetAsModel(GameObject go,float blurStrength = -1f)
         {
-            if (blurStrength > 1f)
+            if (blurStrength > 0.01f)
                 uiCamera.GetComponent<CameraBlur>().StartBlur(blurStrength);
             currentModelWindow = go;
             savedParent = go.transform.parent;
