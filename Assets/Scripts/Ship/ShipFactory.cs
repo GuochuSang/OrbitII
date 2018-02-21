@@ -32,7 +32,7 @@ namespace ShipProject
 				SerializeHelp.WriteFile(Application.dataPath + @"/Resources/Ship/" + ship.ShipName, shipBytes);
 			}
 
-			public void LoadShipAtTransform(string shipName,Transform theTransform)
+			public Ship LoadShipAtTransform(string shipName,Transform theTransform)
 			{
 				byte[] shipBytes = SerializeHelp.ReadFile(Application.dataPath + "/Resources/Ship/" + shipName);
 				ShipData shipData = SerializeHelp.ReadObjectData<ShipData>(shipBytes);
@@ -45,6 +45,8 @@ namespace ShipProject
 						(ShipEnum.ShipUnitRotation) Enum.ToObject(typeof(ShipEnum.ShipUnitRotation), component.rotation),
 						(ShipEnum.ShipUnitMirror) Enum.ToObject(typeof(ShipEnum.ShipUnitMirror), component.mirror));
 				}
+
+				return ship;
 			}
 
 			#region test

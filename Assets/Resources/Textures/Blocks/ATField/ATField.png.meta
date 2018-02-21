@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: f768f56a20a19854688f7976db449293
-timeCreated: 1518449611
+timeCreated: 1519220212
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -11,6 +11,7 @@ TextureImporter:
     21300008: ATSHEILD_4
     21300010: ATSHEILD_5
     21300012: ATSHEILD_6
+    21300014: ATField_0
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -209,7 +210,21 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ATField_0
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 54
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

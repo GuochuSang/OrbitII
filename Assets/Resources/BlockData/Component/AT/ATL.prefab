@@ -211,7 +211,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1005755817980564}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.8, y: 0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224656949211137438}
@@ -565,7 +565,8 @@ MonoBehaviour:
   Mirror: 0
   pos: {x: 0, y: 0}
   ParentShip: {fileID: 0}
-  SpriteOnUI: {fileID: 0}
+  SpriteOnUI: {fileID: 21300012, guid: f768f56a20a19854688f7976db449293, type: 3}
+  SpriteOnFactory: {fileID: 21300014, guid: f768f56a20a19854688f7976db449293, type: 3}
 --- !u!114 &114967325488802806
 MonoBehaviour:
   m_ObjectHideFlags: 1

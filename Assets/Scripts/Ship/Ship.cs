@@ -244,27 +244,27 @@ namespace ShipProject
 			SetNearby(pos + new Vector2Int(1, 0));
 			SetNearby(pos + new Vector2Int(-1, 0));
 		}
-		/// <summary>
-		/// 添加某个ID的组件
-		/// </summary>
-		/// <param name="id">组件ID</param>
-		/// <param name="level">组件等级</param>
-		/// <param name="pos">组件原点坐标</param>
-		/// <param name="rotation">组件旋转</param>
-		/// <param name="mirror">组件镜像</param>
-		public ShipComponent AddComponent(int id,int level, Vector2Int pos, ShipUnitRotation rotation = ShipUnitRotation.d0,ShipUnitMirror mirror = ShipUnitMirror.Normal)
-		{
 
+		public bool ComponentPutable(int id, int level, Vector2Int pos, ShipUnitRotation rotation = ShipUnitRotation.d0,
+			ShipUnitMirror mirror = ShipUnitMirror.Normal)
+		{
+			if (GetShipComponent(id, level) == null)
+			{
+				return false;
+				Debug.Log("1");
+			}
 			if (id == 0 && core != null)
 			{
-				return null;
+				return false;
+				Debug.Log("2");
+
 			}
 			List<Vector2Int> whiteList = new List<Vector2Int>(), blackList = new List<Vector2Int>();
-			ShipComponent component = GetShipComponent(id,level);
-			bool whiteCheck = false, blackCheck = true; 
+			ShipComponent component = GetShipComponent(id, level);
+			bool whiteCheck = false, blackCheck = true;
 			foreach (var bk in component.BlockList)
 			{
-				if (!GetBlock(bk.id,level).CanAddWithoutList&&WhiteListPos.Contains(PosTrans(new Vector2Int(bk.posX, bk.posY), rotation, mirror) + pos))
+				if (!GetBlock(bk.id, level).CanAddWithoutList && WhiteListPos.Contains(PosTrans(new Vector2Int(bk.posX, bk.posY), rotation, mirror) + pos))
 				{
 					whiteCheck = true;
 				}
@@ -281,26 +281,49 @@ namespace ShipProject
 				if ((Blocks.ContainsKey(PosTrans(new Vector2Int(bk.posX, bk.posY), rotation, mirror) + pos)))
 				{
 					blackCheck = false;
+					Debug.Log("b1");
 				}
 
 				if (((BlackListPos.Contains(PosTrans(new Vector2Int(bk.posX, bk.posY), rotation, mirror) + pos)) &&
 				     (!GetBlock(bk.id, level).CanAddOnBlackList)))
 				{
 					blackCheck = false;
+					Debug.Log("b2");
+
 				}
-				foreach(var p in GetBlock(bk.id,level).CheckPos)
+				foreach (var p in GetBlock(bk.id, level).CheckPos)
 				{
-					if (Blocks.ContainsKey(PosTrans(new Vector2Int(bk.posX, bk.posY)+p, rotation, mirror) + pos))
+					if (Blocks.ContainsKey(PosTrans(new Vector2Int(bk.posX, bk.posY) + p, rotation, mirror) + pos))
 					{
 						blackCheck = false;
+						Debug.Log("b3");
+
 					}
 				}
 			}
-			if (!whiteCheck||!blackCheck)
+			if (!whiteCheck || !blackCheck)
+			{
+				return false;
+				Debug.Log("3");
+			}
+			return true;
+		}
+		/// <summary>
+		/// 添加某个ID的组件
+		/// </summary>
+		/// <param name="id">组件ID</param>
+		/// <param name="level">组件等级</param>
+		/// <param name="pos">组件原点坐标</param>
+		/// <param name="rotation">组件旋转</param>
+		/// <param name="mirror">组件镜像</param>
+		public ShipComponent AddComponent(int id,int level, Vector2Int pos, ShipUnitRotation rotation = ShipUnitRotation.d0,ShipUnitMirror mirror = ShipUnitMirror.Normal)
+		{
+
+			if (!ComponentPutable(id, level, pos, rotation, mirror))
 			{
 				return null;
 			}
-
+			ShipComponent component = GetShipComponent(id, level);
 			var componentTransform= Instantiate(GetShipComponent(id,level).gameObject, transform).transform;
 			var shipComponent = componentTransform.GetComponent<ShipComponent>();
 			componentTransform.localPosition= Block.GetLocalPositionFromShipPos(pos);
@@ -489,7 +512,7 @@ namespace ShipProject
 		/// <param name="id">方块id</param>
 		/// <param name="level">方块等级</param>
 		/// <returns></returns>
-		public Block GetBlock(int id,int level)
+		public static Block GetBlock(int id,int level)
 		{
 			return ShipUnitLister.GetInstance().GetUnit<Block>(id,level);
 		}
@@ -498,7 +521,7 @@ namespace ShipProject
 		/// </summary>
 		/// <param name="id">组件ID</param>
 		/// <returns></returns>
-		public ShipComponent GetShipComponent(int id,int level)
+		public static ShipComponent GetShipComponent(int id,int level)
 		{
 			return ShipUnitLister.GetInstance().GetUnit<ShipComponent>(id,level);
 		}
