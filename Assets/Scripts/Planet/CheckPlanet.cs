@@ -69,11 +69,13 @@ namespace Universe
         void EnterControlCenter(ControlCenter center)
         {
             currentControlCenter = center;
+            EventManager.Instance.PostEvent(GameEvent.ENTER_BUILDING_AREA,this,center);
             Debug.Log("靠近了控制中心");
         }
         void ExitControlCenter()
         {
             currentControlCenter = null;
+            EventManager.Instance.PostEvent(GameEvent.EXIT_BUILDING_AREA,this);
             Debug.Log("离开了控制中心");
         }
         bool CheckIn(int layerMask,string tag,out RaycastHit2D hit)
@@ -81,7 +83,7 @@ namespace Universe
             hit = RayCast(layerMask);
             if (hit.collider != null && hit.collider.tag.Equals(tag))
             {
-                Debug.Log("Fucking Checked !!!!!!!!!!");
+                Debug.Log("Checked Ship in "+tag);
                 return true;
             }
             return false;

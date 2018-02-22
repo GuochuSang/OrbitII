@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4223966279050150}
   - component: {fileID: 212261760093780476}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4543245268356544}
   - component: {fileID: 212871402496638608}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: DiZuo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4551627024929856}
   - component: {fileID: 212806418189061684}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 212405247339682732}
   - component: {fileID: 114691130651172436}
   - component: {fileID: 58312042541894848}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: CONTROL_CENTER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.011671782, y: 1.7850001}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2.55
 --- !u!95 &95396509778296378

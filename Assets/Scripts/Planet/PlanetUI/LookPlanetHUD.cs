@@ -11,13 +11,13 @@ public class LookPlanetHUD : MonoBehaviour {
     {
         if (PlanetUI.Instance.watchState != PlanetUI.WatchState.HALF_FREE)
         {
-            PoolManager.Instance.ReturnCacheGameObejct(this.gameObject);
+            Destroy(this.gameObject);
             return;
         }
         if (Input.GetKeyDown(key))
         {
             PlanetUI.Instance.LookPlanet();
-            PoolManager.Instance.ReturnCacheGameObejct(this.gameObject);
+            Destroy(this.gameObject);
         }
 	}
 }

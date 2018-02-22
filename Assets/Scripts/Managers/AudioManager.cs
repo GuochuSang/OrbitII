@@ -80,8 +80,8 @@ namespace Manager
             //注册暂停事件
             OnEvent pause = OnPauseGame;
             OnEvent unpause = OnUnPauseGame;
-            EventManager.instance.AddListener(GameEvent.GAME_PAUSE,pause);
-            EventManager.instance.AddListener(GameEvent.GAME_UNPAUSE, unpause);
+            EventManager.instance.AddListener(this,GameEvent.GAME_PAUSE,pause);
+            EventManager.instance.AddListener(this,GameEvent.GAME_UNPAUSE, unpause);
         }
 
         #region 基础音频功能

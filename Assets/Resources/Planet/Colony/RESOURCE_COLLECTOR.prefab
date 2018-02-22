@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4015263612438914}
   - component: {fileID: 212072379058350040}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fac0_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 95905651285211782}
   - component: {fileID: 212414654927526496}
   - component: {fileID: 114313753011426932}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RESOURCE_COLLECTOR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4401569012814842}
   - component: {fileID: 212212794297225590}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fac0_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
