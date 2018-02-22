@@ -321,7 +321,8 @@ MonoBehaviour:
   Mirror: 0
   pos: {x: 0, y: 0}
   ParentShip: {fileID: 0}
-  SpriteOnUI: {fileID: 0}
+  SpriteOnUI: {fileID: 21300016, guid: e0992e30a0abb2f498485f45ca06942a, type: 3}
+  SpriteOnFactory: {fileID: 21300018, guid: e0992e30a0abb2f498485f45ca06942a, type: 3}
 --- !u!212 &212575003713603192
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -80,7 +80,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 100
-  healthRate: 0
 --- !u!114 &114733710917767462
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -109,17 +108,14 @@ MonoBehaviour:
   LeftBlock: {fileID: 0}
   WhiteListPos:
   - {x: 1, y: 0}
-  - {x: 1, y: 1}
   - {x: 0, y: 1}
-  - {x: -1, y: 1}
   - {x: -1, y: 0}
-  - {x: -1, y: -1}
   - {x: 0, y: -1}
-  - {x: 1, y: -1}
   BlackListPos:
   - {x: 0, y: 0}
   CheckPos: []
   searched: 0
+  isShipBlock: 1
 --- !u!212 &212658007362790528
 SpriteRenderer:
   m_ObjectHideFlags: 1

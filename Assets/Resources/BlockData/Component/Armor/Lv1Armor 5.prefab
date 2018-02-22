@@ -109,4 +109,4 @@ MonoBehaviour:
   Mirror: 0
   pos: {x: 0, y: 0}
   ParentShip: {fileID: 0}
-  SpriteOnUI: {fileID: 0}
+  SpriteOnUI: {fileID: 21300010, guid: e35bc5c4ade556f4c9f433cd6a30a900, type: 3}

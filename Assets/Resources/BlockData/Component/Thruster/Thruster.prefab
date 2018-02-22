@@ -176,7 +176,7 @@ MonoBehaviour:
   Mirror: 0
   pos: {x: 0, y: 0}
   ParentShip: {fileID: 0}
-  SpriteOnUI: {fileID: 0}
+  SpriteOnUI: {fileID: 21300000, guid: 29b691aadb9d4d040955d0fa83471017, type: 3}
 --- !u!114 &114340502786877190
 MonoBehaviour:
   m_ObjectHideFlags: 1

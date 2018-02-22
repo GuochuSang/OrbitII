@@ -16,7 +16,8 @@ namespace  ShipProject
 			Armor=1,
 			Dynamic=2,
 			Storage=4,
-			Weapon=5
+			Weapon=5,
+			All=6
 		}
 	}
 	public class ShipComponent : SerializedMonoBehaviour,IComparable
@@ -102,6 +103,8 @@ namespace  ShipProject
 		[Tooltip("UI标识")]
 		[TabGroup("组件", "属性")]
 		public Sprite SpriteOnUI;
+
+		public Sprite SpriteOnFactory;
 		/// <summary>
 		/// 根据ID顺序排序
 		/// </summary>
