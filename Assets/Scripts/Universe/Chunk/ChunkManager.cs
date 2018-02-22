@@ -56,12 +56,25 @@ namespace Universe
             currentChunks = new List<Chunk>();
             GenerateTilemap();
             Load();
+
+            EventManager.Instance.AddListener(this, GameEvent.SAVE_GAME, OnSaveGame);
         }
+        void OnDestroy()
+        {
+            EventManager.Instance.RemoveObjectEvent(this, GameEvent.SAVE_GAME);
+        }
+
 
         void Update()
         {
             UpdateArea((Vector2)updateCamera.position);
         }
+        #region 事件: 保存..
+        public void OnSaveGame(GameEvent gameEvent,Component comp,object param = null)
+        {
+            this.Save();
+        }
+        #endregion
 
         #region Chunks数据存储/读取 (实现ISaveable接口|公有的Save,Load接口)
         public void fromSaveData(SaveData chunkManagerData)

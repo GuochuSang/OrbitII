@@ -19,6 +19,10 @@ namespace Manager
         GAME_UNPAUSE,
         ENTER_RECORD, // 进入了一个存档!!!加载新场景...
         EXIT_RECORD_WITH_SAVE, // 退出了一个存档!!!加载主菜单...
+        SAVE_GAME,
+
+        ENTER_SHIP_FACTORY,
+        EXIT_SHIP_FACTORY,
 
         ENTER_PLANET_AREA, // 进入星球范围 (参数为: 飞船, 星球)
         EXIT_PLANET_AREA,  // 离开星球范围

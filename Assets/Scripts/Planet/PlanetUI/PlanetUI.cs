@@ -250,11 +250,11 @@ namespace Universe
         /// </summary>
         public void New()
         {
-            //BuildingBase building = Instantiate<GameObject>(ShipFactory.GetBuildingPrefab(BuildingType.SHIP_FACTORY)).GetComponent<BuildingBase>();
-            //Build(building ,LookLandIndex,currentPlanet);
-
-            BuildingBase building = Instantiate<GameObject>(ResourceCollector.GetBuildingPrefab(BuildingType.RESOURCE_COLLECTOR)).GetComponent<BuildingBase>();
+            BuildingBase building = Instantiate<GameObject>(ShipFactory.GetBuildingPrefab(BuildingType.SHIP_FACTORY)).GetComponent<BuildingBase>();
             Build(building ,LookLandIndex,currentPlanet);
+
+            //BuildingBase building = Instantiate<GameObject>(ResourceCollector.GetBuildingPrefab(BuildingType.RESOURCE_COLLECTOR)).GetComponent<BuildingBase>();
+            //Build(building ,LookLandIndex,currentPlanet);
         }
         /// <summary>
         /// 默认打开当前Building

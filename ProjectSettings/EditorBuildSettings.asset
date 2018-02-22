@@ -20,3 +20,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scene/GameScene.unity
     guid: 6bfdc9f24302d9342a7562930cff8935
+  - enabled: 1
+    path: Assets/Scene/ShipFactory.unity
+    guid: e59fb50dd4556ef40aa497155823d481
