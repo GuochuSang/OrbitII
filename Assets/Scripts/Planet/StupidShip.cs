@@ -34,20 +34,5 @@ public class StupidShip : MonoBehaviour
             CameraController.Instance.SetSize(CameraController.Instance.DefaultFreeSize);
         }
     }
-        
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        Planet pl = other.GetComponent<Planet>();
-        if (pl == null)
-            return;
-        EventManager.Instance.PostEvent(GameEvent.ENTER_PLANET_AREA, this, pl);
-    }
-    void OnTriggerExit2D(Collider2D other)
-    {
-        Planet pl = other.GetComponent<Planet>();
-        if (pl == null)
-            return;
-        EventManager.Instance.PostEvent(GameEvent.EXIT_PLANET_AREA, this, pl);
-    }
 }
 

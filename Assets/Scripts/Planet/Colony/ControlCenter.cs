@@ -30,10 +30,12 @@ namespace Universe
         }
     	void Awake () 
         {
+            gameObject.tag = "ControlCenter";
             type = BuildingType.CONTROL_CENTER;
             Debug.Log("新建了控制中心!");
 
     	}
+
         protected override void StartWork()
         {
             

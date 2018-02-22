@@ -70,6 +70,7 @@ GameObject:
   - component: {fileID: 95396509778296378}
   - component: {fileID: 212405247339682732}
   - component: {fileID: 114691130651172436}
+  - component: {fileID: 58312042541894848}
   m_Layer: 0
   m_Name: CONTROL_CENTER
   m_TagString: Untagged
@@ -132,6 +133,21 @@ Transform:
   m_Father: {fileID: 4081225654572488}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &58312042541894848
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1424441518005804}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.011671782, y: 1.7850001}
+  serializedVersion: 2
+  m_Radius: 2.55
 --- !u!95 &95396509778296378
 Animator:
   serializedVersion: 3
@@ -165,6 +181,7 @@ MonoBehaviour:
     idy: 0
     className: 
     sceneName: 
+  momColony: {fileID: 0}
 --- !u!212 &212261760093780476
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -248,7 +265,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 5.2, y: 7.1}
+  m_Size: {x: 5, y: 5.1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0

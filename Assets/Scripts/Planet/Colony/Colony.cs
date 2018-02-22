@@ -101,10 +101,12 @@ namespace Universe
         /// <summary>
         /// 在指定下标绑定建筑
         /// </summary>
-        public void SetBuildingAtIndex(int index,BuildingBase building, float heightRatio = 1.16f)
+        public void SetBuildingAtIndex(int index,BuildingBase building)
         {
             index = momPlanet.GetValidIndex(index);
             // 将建筑建造到星球
+            // 需要计算heightRatio 妈耶, 8.5是需要调整的, 建筑中心离底边, 8.5越高
+            float heightRatio = (momPlanet.Radius+8.5f)/momPlanet.Radius;
             momPlanet.SetGameObjectAtIndex(building.gameObject, index, heightRatio);
             // 位置确定后生成buildingID
             if (building.id == null || (building.id.className + "").Equals(""))

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - ShipComponent
+  - Planet
+  - ControlCenter
   layers:
   - Default
   - TransparentFX
@@ -16,8 +18,8 @@ TagManager:
   - 
   - Emission
   - Background
-  - 
-  - 
+  - Planet
+  - Building
   - 
   - 
   - 

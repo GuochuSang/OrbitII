@@ -41,6 +41,10 @@ namespace Universe
             return buildingPrefabs[buildingType];
         }
 
+        void Awake()
+        {
+            gameObject.layer = LayerMask.NameToLayer("Planet");
+        }
         /// <summary>
         /// 初始化ID
         /// </summary>

@@ -16,6 +16,8 @@ public class BuildingUI : MonoSingleton<BuildingUI>
     public void Open(BuildingBase building)
     {
         Debug.Log("Open"+building.Type);
+        if (building.Type == BuildingType.CONTROL_CENTER)
+            ShowContainer.Instance.Show(building.momColony.container, 7, 7);
     }
     public void Upgrade(BuildingBase building)
     {
