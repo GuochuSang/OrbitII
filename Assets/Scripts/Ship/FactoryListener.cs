@@ -165,7 +165,7 @@ public class FactoryListener : MonoBehaviour
 		if (Testing)
 		{
 			camera.transform.position = currentShip.transform.position+new Vector3(0,0,-10f);
-			if (Input.GetButtonDown("X"))
+			if (Input.GetButtonDown(MenuButton))
 			{
 				Testing = false;
 				currentShip.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
@@ -182,6 +182,9 @@ public class FactoryListener : MonoBehaviour
 
 	public void TurnToTest()
 	{
+		EventSystem.SetActive(false);
+		menu.SetBool("work", false);
+		SetColor();
 		Testing = true;
 		currentShip.GetComponent<ShipControl>().mode = ShipControlMode.Player;
 		foreach (Transform t in transform)
