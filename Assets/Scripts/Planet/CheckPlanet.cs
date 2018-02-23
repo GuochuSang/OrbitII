@@ -83,7 +83,6 @@ namespace Universe
             hit = RayCast(layerMask);
             if (hit.collider != null && hit.collider.tag.Equals(tag))
             {
-                Debug.Log("Checked Ship in "+tag);
                 return true;
             }
             return false;
