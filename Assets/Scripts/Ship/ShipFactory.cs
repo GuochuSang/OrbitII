@@ -59,8 +59,10 @@ namespace ShipProject
 				byte[] shipBytes = SerializeHelp.WriteObjectData(new ShipData(ship.ShipName, records));
 				SerializeHelp.WriteFile(Application.dataPath + @"/Resources/Ship/"+camp.ToString() + ship.ShipName + ".ship", shipBytes);
 			}
+
 			public Dictionary<GameCamp, List<string>> ShipNames = new Dictionary<GameCamp, List<string>>();
 			public void ListShipName(string path,GameCamp camp)
+
 			{
 				//获取指定文件夹的所有文件  
 				string[] paths = Directory.GetFiles(path);
@@ -99,6 +101,7 @@ namespace ShipProject
 			}
 
 			public void LoadList(GameCamp camp)
+
 			{
 				ShipNames[camp].Clear();
 				ShipPath = Application.dataPath + "/Resources/Ship";
