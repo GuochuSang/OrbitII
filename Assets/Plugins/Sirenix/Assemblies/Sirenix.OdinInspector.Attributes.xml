@@ -2653,7 +2653,7 @@
             <note type="note">Note that this attribute only works in the editor! Values changed from scripting will not be capped at a minimum.</note>
             </remarks>
             <example>
-            <para>The following example shows a player component that must have at least 1 life.</para>
+            <para>The following example shows a Player_ component that must have at least 1 life.</para>
             <code>
             public class Player : MonoBehaviour
             {

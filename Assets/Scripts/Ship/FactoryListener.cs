@@ -49,7 +49,7 @@ public class FactoryListener : MonoBehaviour
 	public void SaveShip(string shipName)
 	{
 		currentShip.ShipName = shipName;
-		factory.SavePlayerShip(currentShip);
+		factory.SaveShip(currentShip,GameCamp.Player_);
 	}
 
 	public void LoadShip(string shipName)
@@ -57,7 +57,7 @@ public class FactoryListener : MonoBehaviour
 
 		if (currentShip != null)
 			Destroy(currentShip.gameObject);
-		currentShip = factory.LoadPlayerShip(shipName,factory.transform);
+		currentShip = factory.LoadShipAtTransform(shipName,factory.transform,GameCamp.Player_);
 	}
 	public void Update()
 	{

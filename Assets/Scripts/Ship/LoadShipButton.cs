@@ -15,12 +15,12 @@ namespace ShipProject.Factory.UI
 		[Button("LoadButtons")]
 		public void LoadButtons()
 		{
-			ShipFactory.instance.LoadList();
+			ShipFactory.instance.LoadList(ShipEnum.GameCamp.Player_);
 			foreach (Transform t in transform)
 			{
 				Destroy(t.gameObject);
 			}
-			List<string> names = ShipFactory.instance.PlayerShipNames;
+			List<string> names = ShipFactory.instance.ShipNames[ShipEnum.GameCamp.Player_];
 			if (names.Count == 0)
 			{
 				return;
