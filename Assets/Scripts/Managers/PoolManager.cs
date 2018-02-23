@@ -27,6 +27,7 @@ namespace Manager
         /// </summary>
         public void ReturnCacheGameObejct(GameObject go)
         {
+            go.SetActive(false);
             if (CachePanel == null)
             {
                 CachePanel = new GameObject();
@@ -40,7 +41,6 @@ namespace Manager
             }
 
             go.transform.parent = CachePanel.transform;
-            go.SetActive(false);
 
             if (m_GoTag.ContainsKey(go))
             {

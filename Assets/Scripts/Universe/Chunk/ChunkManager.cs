@@ -29,6 +29,7 @@ namespace Universe
         }
 
         const int flashArea = 3;// 刷新一层
+        public float updatePeriod = 0.1f;// 0.1s更新一次
 
         #region 要储存的数据
         public Dictionary<Vector2Int,ID> allChunkIDs;
@@ -59,15 +60,24 @@ namespace Universe
 
             EventManager.Instance.AddListener(this, GameEvent.SAVE_GAME, OnSaveGame);
         }
+        void Start()
+        {
+            StartCoroutine(UpdateCoroutine());
+            StartCoroutine(UpdateAreaCoroutine());
+        }
         void OnDestroy()
         {
             EventManager.Instance.RemoveObjectEvent(this, GameEvent.SAVE_GAME);
         }
 
 
-        void Update()
+        IEnumerator UpdateCoroutine()
         {
-            UpdateArea((Vector2)updateCamera.position);
+            while (true)
+            {
+                UpdateArea((Vector2)updateCamera.position);
+                yield return new WaitForSeconds(updatePeriod);
+            }
         }
         #region 事件: 保存..
         public void OnSaveGame(GameEvent gameEvent,Component comp,object param = null)
@@ -115,9 +125,13 @@ namespace Universe
 
 
         #region 刷新区域|获得特定位置的Block|设置特定位置的Block|分配一个Child到某个Chunk
+        enum UpdateType{ENTER,UPDATE,EXIT};
+        Queue<KeyValuePair<Chunk,UpdateType>> chunksToUpdate = new Queue<KeyValuePair<Chunk, UpdateType>>();
+
         /// <summary>
         /// 输入位置, 刷新区域
         /// </summary>
+        /*
         public void UpdateArea(Vector2 cameraPos)
         {
             // 1. 首先先检查并管理当前的Chunks的对象列表
@@ -153,6 +167,66 @@ namespace Universe
                     currentChunks.Add(newChunk);
                 }
              
+            }
+        }
+        */
+        public void UpdateArea(Vector2 cameraPos)
+        {
+            // 1. 首先先检查并管理当前的Chunks的对象列表
+            AllotChunkChildren();
+
+            // 2. 有的Chunk开始更新, 有的正常更新, 有的结束更新 
+            Vector2Int chunkPos = ToChunkPos(FloorToVector2Int(cameraPos));
+            // 只有当坐标不同 或 当前没有要更新的Chunk, 才需要更新currentChunks
+            if (currentChunks.Count==0 || chunkPos != centerChunkPos)
+            {
+                centerChunkPos = chunkPos;
+                List<Chunk> newChunks = GetChunksNearby(chunkPos,flashArea);// !!!!!!!!!!!!!!!!!!!!!!!
+                for(int i=currentChunks.Count-1;i>=0;i--)
+                { 
+                    Chunk oldChunk = currentChunks[i];
+                    // 在新的列表中的oldChunk正常更新
+                    if (newChunks.Contains(oldChunk))
+                    {
+                        newChunks.Remove(oldChunk);
+                        chunksToUpdate.Enqueue(new KeyValuePair<Chunk, UpdateType>(oldChunk,UpdateType.UPDATE));
+                    }
+                    // 不在新的列表中的oldChunk退出更新
+                    else
+                    {
+                        currentChunks.Remove(oldChunk);
+                        chunksToUpdate.Enqueue(new KeyValuePair<Chunk, UpdateType>(oldChunk,UpdateType.EXIT));
+                    }
+                }
+                // 新增的Chunk进入更新状态
+                foreach (Chunk newChunk in newChunks)
+                {
+                    chunksToUpdate.Enqueue(new KeyValuePair<Chunk, UpdateType>(newChunk,UpdateType.ENTER));
+                    currentChunks.Add(newChunk);
+                }
+            }
+        }
+        IEnumerator UpdateAreaCoroutine()
+        {
+            while (true)
+            {
+                if (chunksToUpdate.Count > 0)
+                {
+                    var chunkToType = chunksToUpdate.Dequeue();
+                    switch (chunkToType.Value)
+                    {
+                        case UpdateType.ENTER:
+                            chunkToType.Key.EnterUpdate(frontTilemap, backTilemap);
+                            break;
+                        case UpdateType.UPDATE:
+                            chunkToType.Key.Update(frontTilemap, backTilemap);
+                            break;
+                        case UpdateType.EXIT:
+                            chunkToType.Key.ExitUpdate(frontTilemap, backTilemap);
+                            break;
+                    }
+                }
+                yield return null;
             }
         }
 

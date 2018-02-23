@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prepareTime: 5
-  key: 121
+  key: 32
   lightLimit: 0
   lightStrength: 4
   isPressing: 0

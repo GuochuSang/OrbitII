@@ -176,8 +176,6 @@ namespace Universe
             currentBuildingName = currentPlanet.colony.GetBuildingAtIndex(index, out currentBuilding);
 
             EventManager.Instance.PostEvent(GameEvent.LOOK_BUILDING, currentBuilding, currentBuildingName);
-            
-            Debug.Log(index + " : " + currentBuildingName);
         }
 
 
@@ -212,7 +210,6 @@ namespace Universe
                     nearestIndex = i;
                 }
             }
-            Debug.Log("nearestIndex" + nearestIndex);
             while (Vector3.Distance(startPos.position,targetPos)>0.1f)
             {
                 startPos.position = Vector3.Lerp(startPos.position, targetPos, centerFlySpeed);
@@ -244,7 +241,6 @@ namespace Universe
 
             if (isCurrent)
             {
-                Debug.Log("It Look !!!!!!!!!!!!!!!!");
                 currentBuilding = building;
                 LookBuilding(index);
             }

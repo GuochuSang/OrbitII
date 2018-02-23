@@ -22,12 +22,12 @@ namespace Universe
         public UnityEvent KeyboardEvent;
 
         #region 处理暂停输入的事件
-        void OnEnable()
+        void Awake()
         {
             Manager.EventManager.Instance.AddListener(this, Manager.GameEvent.STOP_INPUT, OnStopInput);
             Manager.EventManager.Instance.AddListener(this, Manager.GameEvent.RESTART_INPUT, OnRestartInput);
         }
-        void OnDisable()
+        void OnDestroy()
         {
             Manager.EventManager.Instance.RemoveObjectEvent(this, Manager.GameEvent.STOP_INPUT);
             Manager.EventManager.Instance.RemoveObjectEvent(this, Manager.GameEvent.RESTART_INPUT);
