@@ -28,6 +28,7 @@ public class FactoryListener : MonoBehaviour
 	public ShipFactoryTypeSelector selector;
 	public List<SpriteRenderer> renderers = new List<SpriteRenderer>();
 	public bool Testing;
+	public Camera camera;
 	private void Awake()
 	{
 		Instance = this;
@@ -45,9 +46,10 @@ public class FactoryListener : MonoBehaviour
 		currentShip.AddComponent(0, 1, new Vector2Int(0, 0));
 	}
 
-	public void SaveShip()
+	public void SaveShip(string shipName)
 	{
-		factory.SaveShip(currentShip);
+		currentShip.ShipName = shipName;
+		factory.SavePlayerShip(currentShip);
 	}
 
 	public void LoadShip(string shipName)
@@ -55,10 +57,12 @@ public class FactoryListener : MonoBehaviour
 
 		if (currentShip != null)
 			Destroy(currentShip.gameObject);
-		currentShip = factory.LoadShipAtTransform(shipName,factory.transform);
+		currentShip = factory.LoadPlayerShip(shipName,factory.transform);
 	}
 	public void Update()
 	{
+
+		camera.orthographicSize += Input.GetAxis("Scroll");
 		if (!Testing)
 		{
 			transform.position = 1.6f*(Vector2) currentPos;
@@ -108,6 +112,7 @@ public class FactoryListener : MonoBehaviour
 					currentPos += new Vector2Int(0, -1);
 					SetColor();
 				}
+				camera.transform.position += (Vector3)new Vector2(Input.GetAxis("CameraH"), Input.GetAxis("CameraV"));
 			}
 			else if(inputTimer>0)
 			{
@@ -153,23 +158,14 @@ public class FactoryListener : MonoBehaviour
 					rotation = (ShipUnitRotation)Enum.ToObject(typeof(ShipUnitRotation), m);
 					ShowCurrentComponent();
 				}
-
-				if (Input.GetButtonDown("Test"))
-				{
-					Testing = true;
-					currentShip.GetComponent<ShipControl>().mode = ShipControlMode.Player;
-					foreach (Transform t in transform)
-					{
-						t.gameObject.SetActive(false);
-					}
-				}
 			}
 
 		}
 
 		if (Testing)
 		{
-			if (Input.GetButtonDown("X"))
+			camera.transform.position = currentShip.transform.position+new Vector3(0,0,-10f);
+			if (Input.GetButtonDown(MenuButton))
 			{
 				Testing = false;
 				currentShip.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
@@ -184,6 +180,18 @@ public class FactoryListener : MonoBehaviour
 		}
 	}
 
+	public void TurnToTest()
+	{
+		EventSystem.SetActive(false);
+		menu.SetBool("work", false);
+		SetColor();
+		Testing = true;
+		currentShip.GetComponent<ShipControl>().mode = ShipControlMode.Player;
+		foreach (Transform t in transform)
+		{
+			t.gameObject.SetActive(false);
+		}
+	}
 	public void SetColor()
 	{
 		if (currentShip == null)
