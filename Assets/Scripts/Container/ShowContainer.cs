@@ -39,7 +39,7 @@ namespace Universe
             int pageCount = Mathf.CeilToInt((float)box.GridCount / (float)(xGrid * yGrid));
 
 
-            tabsUICanvas = TabsUI.Instance.SetTabsUI(this, pageCount, width, length + buttonSize);
+            tabsUICanvas = TabsUI.Instance.SetTabsUI(this, pageCount);
 
             for (int j = 0; j < yGrid; j++)
                 for (int i = 0; i < xGrid; i++)

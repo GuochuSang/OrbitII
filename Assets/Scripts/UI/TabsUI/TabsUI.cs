@@ -31,8 +31,13 @@ namespace Universe
 
         public RectTransform tabsUICanvas;
         public Transform buttonsRoot;
+        public RectTransform contentRoot;
+
+        public Sprite choosedButton;
+        public Sprite unChoosedButton;
         // 所有按钮, 按钮名为 Tab+序号
         List<Button> allPageButtons;
+        Dictionary<GameObject,Image> allObjToImage;
         // 当前按钮
         List<Button> currentPageButtons;
         Dictionary<GameObject,Button> currentObjToButton;
@@ -46,12 +51,12 @@ namespace Universe
         void Start()
         {
             allPageButtons = new List<Button>();
+            allObjToImage = new Dictionary<GameObject, Image>();
             for (int i = 1; i <= MAX_TABS; i++)
             {
                 RectTransform buttonTrans = (RectTransform)buttonsRoot.Find(BUTTONS_NAME + i.ToString());
-                buttonTrans.sizeDelta = new Vector2(50f, 34.375f);
-                buttonTrans.anchoredPosition = new Vector2(25f+3.125f*i+50*(i-1),-14.0625f);
                 allPageButtons.Add(buttonTrans.GetComponent<Button>());
+                allObjToImage.Add(buttonTrans.gameObject, buttonTrans.gameObject.GetComponent<Image>());
             }
 
             //for (int i = 0; i < MAX_TABS; i++)
@@ -70,14 +75,13 @@ namespace Universe
             allPageButtons[7].onClick.AddListener( delegate() {this.ShowPage(8);});
             allPageButtons[8].onClick.AddListener( delegate() {this.ShowPage(9);});
 
-
             tabsUICanvas.gameObject.SetActive(false);
         }
         /// <summary>
         /// 设置一个TabUI
         /// 返回自由使用的一个Canvas区域
         /// </summary>
-        public RectTransform SetTabsUI(ITabsUI tabsUI,int pageCount, int width, int length)
+        public RectTransform SetTabsUI(ITabsUI tabsUI,int pageCount)
         {
             currentPageButtons = new List<Button>();
             currentObjToButton = new Dictionary<GameObject, Button>();
@@ -105,20 +109,10 @@ namespace Universe
             }
             this.tabsUI = tabsUI;
             this.pageCount = pageCount;
-            ((RectTransform)tabsUICanvas).sizeDelta = new Vector2(width, length);
             tabsUICanvas.gameObject.SetActive(true);
 
-            GameObject go = new GameObject("TempRoot");
-            go.transform.SetParent(tabsUICanvas);
-            go.transform.localScale = Vector3.one;
-            RectTransform rec = go.AddComponent<RectTransform>();
-            rec.anchorMin = new Vector2(0,1);
-            rec.anchorMax = new Vector2(0, 1);
-            rec.sizeDelta = Vector2.zero;
-            rec.anchoredPosition = Vector2.zero;
-
             UIManager.Instance.SetAsModel(tabsUICanvas.gameObject,1f);
-            return rec;
+            return contentRoot;
         }
         public void CloseTabsUI()
         {
@@ -155,22 +149,35 @@ namespace Universe
             UIManager.Instance.SetSelected(allPageButtons[page - 1].gameObject);
             EventSystem.current.SetSelectedGameObject(allPageButtons[page-1].gameObject);
         }
+        // 检查当前选中, 切换页面
         IEnumerator CheckCurrentSelect()
         {
             startShowPage = true;
             while (tabsUI!=null)
             {
                 var obj = EventSystem.current.currentSelectedGameObject;
-                if (obj == null)
+                //if (obj == null)
+                //{
+                //    obj = currentPageButtons[currentPage - 1].gameObject;
+                //    UIManager.Instance.SetSelected(obj);
+                //}
+                if (obj!= null && currentObjToButton.ContainsKey(obj))
                 {
-                    obj = currentPageButtons[currentPage - 1].gameObject;
-                    UIManager.Instance.SetSelected(obj);
-                }
-                if (currentObjToButton.ContainsKey(obj))
-                {
+                    SwapButtonTexture(obj);
                     ShowPage(currentPageButtons.IndexOf(currentObjToButton[obj]) + 1);
                 }
                 yield return null;
+            }
+        }
+        // 改变'按钮'图片
+        void SwapButtonTexture(GameObject currentChoosedButton)
+        {
+            foreach (var kv in allObjToImage)
+            {
+                if (!kv.Key.Equals(currentChoosedButton))
+                    allObjToImage[kv.Key].sprite = unChoosedButton;
+                else
+                    allObjToImage[kv.Key].sprite = choosedButton;
             }
         }
     }

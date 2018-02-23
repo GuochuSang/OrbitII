@@ -23,6 +23,8 @@ namespace Universe
                 ShowContainer.Instance.Show(building.momColony.container, 7, 7);
             else if (building.Type == BuildingType.RESOURCE_COLLECTOR)
                 resourceCollectUI.SetActive(true);
+            else if (building.Type == BuildingType.SHIP_FACTORY)
+                EventManager.Instance.PostEvent(GameEvent.ENTER_SHIP_FACTORY, this,building);
         }
         public void Upgrade(BuildingBase building)
         {

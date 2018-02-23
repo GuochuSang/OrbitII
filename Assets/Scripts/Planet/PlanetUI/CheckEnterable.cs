@@ -11,6 +11,7 @@ namespace Universe
         {
             Manager.EventManager.Instance.AddListener(this,GameEvent.ENTER_BUILDING_AREA,OnEnterControlCenterArea);
             Manager.EventManager.Instance.AddListener(this,GameEvent.EXIT_BUILDING_AREA,OnLeaveControlCenterArea);
+            Manager.EventManager.Instance.AddListener(this,GameEvent.EXIT_PLANET,OnExitPlanet);
         }
         void OnEnable()
         {
@@ -21,11 +22,20 @@ namespace Universe
         {
             Manager.EventManager.Instance.RemoveObjectEvent(this,GameEvent.ENTER_BUILDING_AREA);
             Manager.EventManager.Instance.RemoveObjectEvent(this,GameEvent.EXIT_BUILDING_AREA);
+            Manager.EventManager.Instance.RemoveObjectEvent(this,GameEvent.EXIT_PLANET);
         }
         public void OnEnterControlCenterArea(GameEvent eventType, Component sender, object param = null)
         {
             isOpen = true;
-            this.gameObject.SetActive(true);
+            if (PlanetUI.Instance.watchState == PlanetUI.WatchState.LOOK)
+            {
+                this.gameObject.SetActive(true);
+            }
+        }
+        public void OnExitPlanet(GameEvent eventType, Component sender, object param = null)
+        {
+            if (isOpen)
+                this.gameObject.SetActive(true);
         }
         public void OnLeaveControlCenterArea(GameEvent eventType, Component sender, object param = null)
         {
