@@ -208,11 +208,8 @@ public class Chunk : ISaveable
     /// <summary>
     /// 更新管辖的所有Block, 以及GameObject, 用于经过一段时间后重新加载此区块.
     /// </summary>
-    public void EnterUpdate(Tilemap frontTilemap,Tilemap bkTilemap)
+    public IEnumerator EnterUpdate(Tilemap frontTilemap,Tilemap bkTilemap)
     {
-        // 刷新一些东西出来
-        ChunkFlash.Instance.FlashHere(this);
-
         enableUpdate = true;
         foreach (BlockBase block in frontBlocks)
         {
@@ -227,13 +224,16 @@ public class Chunk : ISaveable
         foreach (IChunkObject child in childObjects)
         {
             child.EnterUpdate();
+            yield return null;
         }
         ShowAllBlockTiles(frontTilemap,bkTilemap);
+        // 刷新一些东西出来
+        ChunkFlash.Instance.FlashHere(this);
     }
     /// <summary>
     /// 当Chunk远离摄像机, 停止更新并储存
     /// </summary>
-    public void ExitUpdate(Tilemap frontTilemap,Tilemap bkTilemap)
+    public IEnumerator ExitUpdate(Tilemap frontTilemap,Tilemap bkTilemap)
     {
         enableUpdate = false;
         foreach (BlockBase block in frontBlocks)
@@ -249,6 +249,7 @@ public class Chunk : ISaveable
         foreach (IChunkObject child in childObjects)
         {
             child.ExitUpdate();
+            yield return null;
         }
         Save();
     }
