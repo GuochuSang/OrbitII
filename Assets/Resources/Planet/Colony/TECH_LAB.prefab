@@ -165,13 +165,14 @@ GameObject:
   - component: {fileID: 4075332957836018}
   - component: {fileID: 95376564005963718}
   - component: {fileID: 212802609417627688}
+  - component: {fileID: 114104929425227404}
   m_Layer: 11
   m_Name: TECH_LAB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4017459143157646
 Transform:
   m_ObjectHideFlags: 1
@@ -328,6 +329,23 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114104929425227404
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1931152729215910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1998b60358777aa43b8e21abc0ba61bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id:
+    idx: 0
+    idy: 0
+    className: 
+    sceneName: 
+  momColony: {fileID: 0}
 --- !u!212 &212028418772571088
 SpriteRenderer:
   m_ObjectHideFlags: 1

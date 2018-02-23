@@ -253,12 +253,9 @@ namespace Universe
         /// <summary>
         /// 建筑新的建筑, TEST
         /// </summary>
-        public void New()
+        public void New(BuildingType type)
         {
-            //BuildingBase building = Instantiate<GameObject>(ShipFactory.GetBuildingPrefab(BuildingType.SHIP_FACTORY)).GetComponent<BuildingBase>();
-            //Build(building ,LookLandIndex,currentPlanet);
-
-            BuildingBase building = Instantiate<GameObject>(ResourceCollector.GetBuildingPrefab(BuildingType.RESOURCE_COLLECTOR)).GetComponent<BuildingBase>();
+            BuildingBase building = Instantiate<GameObject>(BuildingBase.GetBuildingPrefab(type)).GetComponent<BuildingBase>();
             Build(building ,LookLandIndex,currentPlanet);
         }
         /// <summary>

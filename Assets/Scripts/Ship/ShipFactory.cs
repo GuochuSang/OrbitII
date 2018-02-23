@@ -78,7 +78,7 @@ namespace ShipProject
 				Debug.Log("Player_" + shipName);
 				return LoadShipAtTransform("Player_" + shipName, theTransform);
 			}
-
+            // 玩家飞船列表
 			public List<string> PlayerShipNames = new List<string>();
 			public void ListPlayerShipName(string path)
 			{
@@ -113,7 +113,8 @@ namespace ShipProject
 			{
 				LoadList();
 			}
-
+            
+            // 更新列表
 			public void LoadList()
 			{
 				PlayerShipNames.Clear();
