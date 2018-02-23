@@ -11,11 +11,6 @@ namespace Universe
     {
         public GameObject resourceCollectUI;
 
-
-        public BuildingBase New(BuildingType type)
-        {
-            return null;
-        }
         public void Open(BuildingBase building)
         {
             Debug.Log("Open"+building.Type);
