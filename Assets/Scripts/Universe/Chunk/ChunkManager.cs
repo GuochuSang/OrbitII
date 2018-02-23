@@ -216,13 +216,13 @@ namespace Universe
                     switch (chunkToType.Value)
                     {
                         case UpdateType.ENTER:
-                            chunkToType.Key.EnterUpdate(frontTilemap, backTilemap);
+                            StartCoroutine(chunkToType.Key.EnterUpdate(frontTilemap, backTilemap));
                             break;
                         case UpdateType.UPDATE:
                             chunkToType.Key.Update(frontTilemap, backTilemap);
                             break;
                         case UpdateType.EXIT:
-                            chunkToType.Key.ExitUpdate(frontTilemap, backTilemap);
+                            StartCoroutine(chunkToType.Key.ExitUpdate(frontTilemap, backTilemap));
                             break;
                     }
                 }

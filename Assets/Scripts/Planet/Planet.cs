@@ -138,7 +138,6 @@ namespace Universe
         #region ISaveable
         public SaveData toSaveData()
         {
-            Debug.Log("对"+id.ToString()+"进行存档");
             PlanetSaveData data = new PlanetSaveData();
             data.areaCount = this.areaCount;
             data.radius = this.radius;
@@ -163,7 +162,7 @@ namespace Universe
             // 加载资源
             this.resources = gameObject.AddComponent<PlanetResource>();
             this.resources.Init(data.resourcesID, this);
-            GenerateOutLook();
+            StartCoroutine(GenerateOutLook());
 
             if (data.colonyID != null)
             {
@@ -217,7 +216,7 @@ namespace Universe
             // 生成星球(数据)
             InitPlanet(perlinScale);
             // 生成星球(外貌)
-            GenerateOutLook();
+            StartCoroutine(GenerateOutLook());
         }
         /// <summary>
         /// 根据ID生成储存的星球
@@ -247,15 +246,22 @@ namespace Universe
             InitArea();
             InitResource();
         }
+        bool staticAreaGenerationCompleted = false;
         /// <summary>
         /// 在数据已存在(新建/读取存档)时生成星球外貌
         /// </summary>
-        void GenerateOutLook()
+        IEnumerator GenerateOutLook()
         {
             GenerateTrigger();
+            yield return null;
             GenerateSea(); // 2
-            GenerateStaticArea();
+            yield return null;
+            StartCoroutine(GenerateStaticArea());
+            // 等待!
+            while (!staticAreaGenerationCompleted)
+                yield return null;
             GenerateTrees(); // 3
+            yield return null;
             GenerateCloud(); // 0
         }
 
@@ -310,7 +316,7 @@ namespace Universe
             Instantiate(seaPrefab,this.transform);
         }
         // 生成静态的部分 : 土地,及土地的连接
-        void GenerateStaticArea()
+        IEnumerator GenerateStaticArea()
         {
             // 生成基础地形
             for (int landTypeIndex = 0; landTypeIndex < LAND_COUNT; landTypeIndex++)
@@ -325,6 +331,7 @@ namespace Universe
 
                 Texture2D temp = PlanetGenerateHelper.Instance.CutArea(landSprites[landTypeIndex].texture, areaCount, landIndexToShow);
                 targetLand = PlanetGenerateHelper.Instance.Merge(targetLand, temp);
+                yield return null;
             }
 
             // 生成过渡区
@@ -348,6 +355,7 @@ namespace Universe
                     temp = PlanetGenerateHelper.Instance.PixelRotate(transSprite.texture, (index + 1) * areaAngle, false);
                     targetLand = PlanetGenerateHelper.Instance.Merge(temp, targetLand);
                 }
+                yield return null;
             }
             // 处理最后一个!
             int first = (int)lands[areaCount - 1];
@@ -362,13 +370,15 @@ namespace Universe
                 temp = PlanetGenerateHelper.Instance.PixelRotate(tSprite.texture, 0, isFlip);
                 targetLand = PlanetGenerateHelper.Instance.Merge(temp, targetLand);
             }
+            yield return null;
             // 生成核心
             targetLand = PlanetGenerateHelper.Instance.Merge(coreSprite.texture, targetLand);
-
+            yield return null;
             // 显示在屏幕上
             targetLand.filterMode = FilterMode.Point;
             GameObject land = Instantiate<GameObject>(landPrefab,this.transform);
             land.GetComponent<RawImage>().texture = targetLand;
+            staticAreaGenerationCompleted = true;
         }
       
         void GenerateTrees()

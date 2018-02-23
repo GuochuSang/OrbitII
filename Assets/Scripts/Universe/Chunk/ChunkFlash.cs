@@ -26,9 +26,14 @@ namespace Universe
         }
         public void FlashHere(Chunk chunk)
         {
+           // StartCoroutine(FlashCoroutine(chunk));
+        }
+        IEnumerator FlashCoroutine(Chunk chunk)
+        {
             Vector3 chunkPos = new Vector3(chunk.Position.x*Chunk.SIZE, chunk.Position.y*Chunk.SIZE, 0);
-            foreach (var thing in flashableThings)
+            for (int index = 0;index<flashableThings.Count;index++)
             {
+                var thing = flashableThings[index];
                 int flashCount = Mathf.FloorToInt((thing.showRatio - Random.value)/(thing.showRatio/thing.maxCount));
                 for (int i = 0; i < flashCount; i++)
                 {
@@ -36,7 +41,9 @@ namespace Universe
                     obj.transform.position = chunkPos + new Vector3(Random.value,Random.value,0)*Chunk.SIZE;
                     chunk.AddChild(obj.GetComponent<IChunkObject>());
                     obj.transform.SetParent(flashObjectRoot);
+                    yield return null;
                 }
+                yield return null;
             }
         }
     }
