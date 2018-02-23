@@ -16,13 +16,13 @@ public class StupidShip : MonoBehaviour
     }
     void Awake()
     {
-        EventManager.Instance.AddListener(this, GameEvent.STOP_INPUT, OnStopInput);
-        EventManager.Instance.AddListener(this, GameEvent.RESTART_INPUT, OnRestartInput);
+        EventManager.Instance.AddListener(this, GameEvent.SHIP_STOP_INPUT, OnStopInput);
+        EventManager.Instance.AddListener(this, GameEvent.SHIP_RESTART_INPUT, OnRestartInput);
     }
     void OnDestroy()
     {
-        EventManager.Instance.RemoveObjectEvent(this, GameEvent.STOP_INPUT);
-        EventManager.Instance.RemoveObjectEvent(this, GameEvent.RESTART_INPUT);
+        EventManager.Instance.RemoveObjectEvent(this, GameEvent.SHIP_STOP_INPUT);
+        EventManager.Instance.RemoveObjectEvent(this, GameEvent.SHIP_RESTART_INPUT);
     }
     void OnRestartInput(GameEvent gameEvent,Component comp, object param = null)
     {

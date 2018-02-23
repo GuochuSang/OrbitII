@@ -17,6 +17,7 @@ namespace Universe
         public int buttonSize = 20;
 
         RectTransform[,] grids;
+        RectTransform gridsParent;
         Text[,] gridsText;
         // 添加内容的区域, 从tabsUI获得
         RectTransform tabsUICanvas;
@@ -44,12 +45,12 @@ namespace Universe
             for (int j = 0; j < yGrid; j++)
                 for (int i = 0; i < xGrid; i++)
                 {
-                    RectTransform gridXY = (Instantiate(uiGridPrefab, tabsUICanvas) as GameObject).GetComponent<RectTransform>();
-                    grids[i, j] = gridXY;
-                    gridXY.sizeDelta = new Vector2(gridSize, gridSize);
-                    gridXY.anchoredPosition = new Vector2((i+1)*gapSize+i*gridSize + gridSize/2,-(buttonSize+(j+1)*gapSize+j*gridSize+gridSize/2));
+                    gridsParent = (Instantiate(uiGridPrefab, tabsUICanvas) as GameObject).GetComponent<RectTransform>();
+                    grids[i, j] = gridsParent;
+                    gridsParent.sizeDelta = new Vector2(gridSize, gridSize);
+                    gridsParent.anchoredPosition = new Vector2((i+1)*gapSize+i*gridSize + gridSize/2,-(buttonSize+(j+1)*gapSize+j*gridSize+gridSize/2));
 
-                    GameObject go = Instantiate(uiTextPrefab,gridXY) as GameObject;
+                    GameObject go = Instantiate(uiTextPrefab,gridsParent) as GameObject;
                     gridsText[i,j] = go.GetComponent<Text>();
                 }
 
@@ -88,7 +89,7 @@ namespace Universe
         }
         public void CloseTabsUI()
         {
-            Destroy(grids[0, 0].parent.gameObject);
+            Destroy(gridsParent.gameObject);
             //for (int i = 0; i < currentSize.x; i++)
             //    for (int j = 0; j < currentSize.y; j++)
             //    {

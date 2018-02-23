@@ -11,11 +11,11 @@ namespace Universe
         public Button upgrade;
         public Button recycle;
 
-        void OnEnable()
+        void Awake()
         {
             Manager.EventManager.Instance.AddListener(this,Manager.GameEvent.LOOK_BUILDING, OnLookingBuilding);
         }
-        void OnDisable()
+        void OnDestroy()
         {
             Manager.EventManager.Instance.RemoveObjectEvent(this,Manager.GameEvent.LOOK_BUILDING);
         }

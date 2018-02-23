@@ -38,6 +38,8 @@ namespace Manager
 
         STOP_INPUT, // 暂停除了当前界面以外的其他输入
         RESTART_INPUT, // 重新接收输入
+        SHIP_STOP_INPUT, // 飞船暂停输入
+        SHIP_RESTART_INPUT, // 飞船接收输入
     };
 
     /// <summary>

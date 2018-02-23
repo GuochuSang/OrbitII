@@ -6,10 +6,10 @@ namespace Universe
 {
     public class UniverseChunkObject : MonoBehaviour,IChunkObject
     {
-        public const float maxDistance = 176;//(maxPlanetRadius + baseHeight)*2
-        public const float maxRayCastDistanceToPlanet = 50f;
+        public const float maxDistance = 196;//(maxPlanetRadius + baseHeight)*2
+        public const float maxRayCastDistanceToPlanet = 70f;
         // 不能在地表飞行, 基础高度
-        public const float baseHeight = 20f;
+        public const float baseHeight = 30f;
         public const float maxSelfRotateSpeed = 10f;
         public const float maxMoveSpeed = 4f;
         public const float maxPlanetRadius = 68f;

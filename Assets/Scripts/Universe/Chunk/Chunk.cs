@@ -173,9 +173,12 @@ public class Chunk : ISaveable
             }
         foreach (IChunkObject child in childObjects)
         {
-            ID childID = child.Save();
-            if(childID != null)
-                childObjectIDs.Add(childID);
+            if (child != null)
+            {
+                ID childID = child.Save();
+                if (childID != null)
+                    childObjectIDs.Add(childID);
+            }
         }
         
 
@@ -221,11 +224,15 @@ public class Chunk : ISaveable
             if(block!=null)
                 block.EnterUpdate();
         }
-        foreach (IChunkObject child in childObjects)
+        for (int i=childObjects.Count-1;i>=0;i--)
         {
-            child.EnterUpdate();
+            IChunkObject child = childObjects[i];
+            if(child != null)
+                child.EnterUpdate();
             yield return null;
         }
+
+
         ShowAllBlockTiles(frontTilemap,bkTilemap);
         // 刷新一些东西出来
         ChunkFlash.Instance.FlashHere(this);
@@ -246,9 +253,11 @@ public class Chunk : ISaveable
             if(block != null)
                 block.ExitUpdate();
         }
-        foreach (IChunkObject child in childObjects)
+        for (int i=childObjects.Count-1;i>=0;i--)
         {
-            child.ExitUpdate();
+            IChunkObject child = childObjects[i];
+            if(child != null)
+                child.ExitUpdate();
             yield return null;
         }
         Save();
