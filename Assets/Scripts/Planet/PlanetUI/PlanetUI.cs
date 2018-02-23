@@ -62,10 +62,15 @@ namespace Universe
             }
         }
 
-        void Start()
+        void OnEnable()
         {
-            EventManager.Instance.AddListener(GameEvent.ENTER_PLANET_AREA, OnSomethingEnterArea);
-            EventManager.Instance.AddListener(GameEvent.EXIT_PLANET_AREA, OnSomethingExitArea);
+            EventManager.Instance.AddListener(this,GameEvent.ENTER_PLANET_AREA, OnSomethingEnterArea);
+            EventManager.Instance.AddListener(this,GameEvent.EXIT_PLANET_AREA, OnSomethingExitArea);
+        }
+        void OnDisable()
+        {
+            EventManager.Instance.RemoveObjectEvent(this,GameEvent.ENTER_PLANET_AREA);
+            EventManager.Instance.RemoveObjectEvent(this,GameEvent.EXIT_PLANET_AREA);
         }
 
         public void OnSomethingEnterArea(GameEvent eventType, Component sender, object param = null)

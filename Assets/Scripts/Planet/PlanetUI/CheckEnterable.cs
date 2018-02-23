@@ -4,22 +4,33 @@ using UnityEngine;
 using Manager;
 namespace Universe 
 {
-public class CheckEnterable : MonoBehaviour 
-{
-    void Awake()
+    public class CheckEnterable : MonoBehaviour 
     {
-        Manager.EventManager.Instance.AddListener(GameEvent.COLONY_SET_UP,OnConlonySetUp);
-        Manager.EventManager.Instance.AddListener(GameEvent.LOOK_PLANET,OnLookPlanet);
-    }
-    public void OnConlonySetUp(GameEvent eventType, Component sender, object param = null)
-    {
-        this.gameObject.SetActive(true);
-    }
-    public void OnLookPlanet(GameEvent eventType, Component sender, object param = null)
-    {
-        if(PlanetUI.Instance.CurrentPlanet.colony == null)
+        bool isOpen = false;
+        void Awake()
+        {
+            Manager.EventManager.Instance.AddListener(this,GameEvent.ENTER_BUILDING_AREA,OnEnterControlCenterArea);
+            Manager.EventManager.Instance.AddListener(this,GameEvent.EXIT_BUILDING_AREA,OnLeaveControlCenterArea);
+        }
+        void OnEnable()
+        {
+            if(!isOpen)
+                this.gameObject.SetActive(false);
+        }
+        void OnDestroy()
+        {
+            Manager.EventManager.Instance.RemoveObjectEvent(this,GameEvent.ENTER_BUILDING_AREA);
+            Manager.EventManager.Instance.RemoveObjectEvent(this,GameEvent.EXIT_BUILDING_AREA);
+        }
+        public void OnEnterControlCenterArea(GameEvent eventType, Component sender, object param = null)
+        {
+            isOpen = true;
+            this.gameObject.SetActive(true);
+        }
+        public void OnLeaveControlCenterArea(GameEvent eventType, Component sender, object param = null)
+        {
+            isOpen = false;
             this.gameObject.SetActive(false);
-        else this.gameObject.SetActive(true);
+        }
     }
-}
 }

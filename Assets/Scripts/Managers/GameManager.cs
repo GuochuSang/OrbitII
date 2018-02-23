@@ -20,8 +20,8 @@ namespace Manager
         void Start()
         {
             SceneManager.LoadScene(mainMenuScene);
-            EventManager.Instance.AddFinalListener(GameEvent.ENTER_RECORD,OnEnterRecord);
-            EventManager.Instance.AddFinalListener(GameEvent.EXIT_RECORD_WITH_SAVE,OnExitRecord);
+            EventManager.Instance.AddListener(this,GameEvent.ENTER_RECORD,OnEnterRecord);
+            EventManager.Instance.AddListener(this,GameEvent.EXIT_RECORD_WITH_SAVE,OnExitRecord);
             Resource.InitElements();
         }
         void OnEnterRecord(GameEvent gameEvent,Component comp,object param = null)
@@ -33,14 +33,7 @@ namespace Manager
         void OnExitRecord(GameEvent gameEvent,Component comp,object param = null)
         {
             ChunkManager.Instance.Save();
-
             SceneManager.LoadScene(mainMenuScene);
-
-            for(int i=(int)GameEvent.MID_NULL;i<=(int)GameEvent.END_NULL;i++)
-            {
-                EventManager.Instance.RemoveEvent((GameEvent)i);
-            }
-
             ID.ids = new HashSet<ID>();
         }
     }

@@ -13,8 +13,6 @@ namespace Manager
     /// </summary>
     public enum GameEvent
     {
-        START_NULL,
-
         GAME_INIT,
         GAME_END,
         GAME_PAUSE,
@@ -22,18 +20,18 @@ namespace Manager
         ENTER_RECORD, // 进入了一个存档!!!加载新场景...
         EXIT_RECORD_WITH_SAVE, // 退出了一个存档!!!加载主菜单...
 
-        MID_NULL,
-
-        // 在退出存档时, 对后面的事件进行清空, 前面的事件需要自行清空
         ENTER_PLANET_AREA, // 进入星球范围 (参数为: 飞船, 星球)
         EXIT_PLANET_AREA,  // 离开星球范围
+        ENTER_BUILDING_AREA, // 进入了某建筑的范围
+        EXIT_BUILDING_AREA, // 离开了某建筑的范围
         LOOK_PLANET, // 总览星球
         EXIT_LOOKING_PLANET, // 退出总览星球
 
         COLONY_SET_UP, // 殖民星球
         LOOK_BUILDING, // 查看某个建筑(可能是空地)
 
-        END_NULL,
+        STOP_INPUT, // 暂停除了当前界面以外的其他输入
+        RESTART_INPUT, // 重新接收输入
     };
 
     /// <summary>
@@ -46,88 +44,101 @@ namespace Manager
 
     public class EventManager : MonoSingleton<EventManager>
     {
-        private Dictionary<GameEvent,List<OnEvent>> listeners = new Dictionary<GameEvent,List<OnEvent>>();
+        // 每一个事件对应一系列对象, 每一个对象有一个OnEvent委托,  
+        Dictionary<GameEvent,Dictionary<object,OnEvent>> listeners = new Dictionary<GameEvent, Dictionary<object, OnEvent>>();
 
         /// <summary>
         /// 添加监听者(要执行的函数)
         /// </summary>
-        /// <param name="eventType">Event type.</param>
-        /// <param name="listener">Listener.</param>
-        public void AddListener(GameEvent eventType, OnEvent listener)
+        public void AddListener(object obj, GameEvent eventType, OnEvent listener)
         {
-            List<OnEvent> listenerList = null;
-            if (listeners.TryGetValue(eventType, out listenerList))
+            Dictionary<System.Object,OnEvent> objsEvents = null;
+            if (listeners.TryGetValue(eventType, out objsEvents))
             {
-                //List exists
-                listenerList.Insert(0,listener);
+                // 事件存在
+                OnEvent objEvent = null;
+                // 如果对象存在, 添加事件
+                if (objsEvents.TryGetValue(obj, out objEvent))
+                {
+                    if (objEvent == null)
+                        objEvent = listener;
+                    else
+                        objEvent += listener;
+                }
+                // 如果对象不存在, 添加对象
+                else
+                {
+                    objsEvents.Add(obj, listener);
+                }
                 return;
             }
-            listenerList = new List<OnEvent>();
-            listenerList.Insert(0,listener);
-            listeners.Add(eventType,listenerList);  
-        }
-        /// <summary>
-        /// 某个事件的最后的监听者!!
-        /// </summary>
-        /// <param name="eventType">Event type.</param>
-        /// <param name="listener">Listener.</param>
-        public void AddFinalListener(GameEvent eventType, OnEvent listener)
-        {
-            List<OnEvent> listenerList = null;
-            if (listeners.TryGetValue(eventType, out listenerList))
-            {
-                //List exists
-                listenerList.Add(listener);
-                return;
-            }
-            listenerList = new List<OnEvent>();
-            listenerList.Add(listener);
-            listeners.Add(eventType,listenerList);  
+            // 如果事件不存在
+            objsEvents = new Dictionary<object, OnEvent>();
+            objsEvents.Add(obj, listener);
+            listeners.Add(eventType, objsEvents);
         }
         /// <summary>
         /// 当事件发生, 奔走相告
         /// </summary>
-        /// <param name="eventType">Event type.</param>
-        /// <param name="sender">Sender.</param>
-        /// <param name="param">Parameter.</param>
         public void PostEvent(GameEvent eventType, Component sender, object param = null)
         {
-            List<OnEvent> listenerList = null;
+            Dictionary<object,OnEvent> listenerList = null;
             if (!listeners.TryGetValue(eventType, out listenerList))
                 return;
-            foreach (OnEvent e in listenerList)
+            // 不能迭代直接修改
+            /*
+            foreach (var events in listenerList)
             {
-                if(e != null)
-                    e(eventType, sender, param);
+                events.Value(eventType, sender, param);
+            }
+            */
+            List<object> objs = new List<object>(listenerList.Keys);
+            foreach (var obj in objs)
+            {
+                listeners[eventType][obj](eventType, sender, param);
             }
         }
         /// <summary>
         /// 移除一种事件
         /// </summary>
-        /// <param name="eventType">Event type.</param>
         public void RemoveEvent(GameEvent eventType)
         {
             listeners.Remove(eventType);
+        }
+        /// <summary>
+        /// 移除某个Object的某类事件
+        /// </summary>
+        public void RemoveObjectEvent(object obj,GameEvent eventType)
+        {
+            Dictionary<System.Object,OnEvent> objsEvents = null;
+            if (listeners.TryGetValue(eventType, out objsEvents))
+            {
+                objsEvents.Remove(obj);
+            }
         }
         /// <summary>
         /// 清理冗余的null事件
         /// </summary>
         public void RemoveRedundancies()
         {
-            Dictionary<GameEvent, List<OnEvent>> tempListeners = new Dictionary<GameEvent, List<OnEvent>>();
-            foreach (KeyValuePair<GameEvent,List<OnEvent>> item in listeners)
+            Dictionary<GameEvent,Dictionary<object,OnEvent>> tempList = new Dictionary<GameEvent, Dictionary<object, OnEvent>>();
+
+            // 游戏事件-事件下的各个对象
+            foreach (var gameEvents in listeners)
             {
-                for(int i=0;i<item.Value.Count;i++)
+                Dictionary<object, OnEvent> tempObjEvents = new Dictionary<object, OnEvent>();
+                // 对象-对象的事件
+                foreach (KeyValuePair<object, OnEvent> objEvent in gameEvents.Value)
                 {
-                    if (item.Value[i].Equals(null))
-                    {
-                        item.Value.RemoveAt(i);
-                    }
+                    // 委托不为null, 添加这个对象的事件
+                    if (!objEvent.Value.Equals(null))
+                        tempObjEvents.Add(objEvent.Key,objEvent.Value);
                 }
-                if (item.Value.Count > 0)
-                    tempListeners.Add(item.Key,item.Value);
+                // 添加到暂存字典
+                if (tempObjEvents.Count > 0)
+                    tempList.Add(gameEvents.Key, tempObjEvents);
             }
-            listeners = tempListeners;
+            listeners = tempList;
         }
     }
 }

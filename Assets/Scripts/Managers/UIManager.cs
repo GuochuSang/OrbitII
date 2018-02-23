@@ -64,6 +64,7 @@ namespace Manager
         GameObject currentModelWindow;// 当前设置的模态窗口
         Transform savedParent;// 记录这个模态窗口之前的parent
 
+
         /// <summary>
         /// 一个基础的消息框
         /// 通过返回的RectTransform, 对消息框内容进行定制 
@@ -99,6 +100,8 @@ namespace Manager
             go.transform.SetParent(modelCanvas.transform);
             go.transform.SetAsLastSibling();
             HighlightSelectFirstChild(go);
+
+            EventManager.Instance.PostEvent(GameEvent.STOP_INPUT,this);
         }
         /// <summary>
         /// 无论是建立MessageBox还是SetAsModel, 最后都需要CloseModel
@@ -114,6 +117,50 @@ namespace Manager
 
             savedParent = null;
             modelCanvas.gameObject.SetActive(false);
+            EventManager.Instance.PostEvent(GameEvent.RESTART_INPUT,this);
+        }
+        #endregion
+        #region 多重模态UI测试
+        // 只给一个ESC按键, 他不接受停止输入
+        // 他调用CloseMultiModel
+        Stack<KeyValuePair<GameObject,Transform>> modelWindows = new Stack<KeyValuePair<GameObject, Transform>>();
+        public void SetAsMultiModel(GameObject go,float blurStrength = -1f)
+        {
+            modelCanvas.gameObject.SetActive(true);
+            go.transform.SetParent(modelCanvas.transform);
+            go.transform.SetAsLastSibling();
+            HighlightSelectFirstChild(go);
+            if (modelWindows.Count == 0)
+            {
+                modelWindows.Push(new KeyValuePair<GameObject, Transform>(go, go.transform.parent));
+                if (blurStrength > 0.01f)
+                    uiCamera.GetComponent<CameraBlur>().StartBlur(blurStrength);
+                EventManager.Instance.PostEvent(GameEvent.STOP_INPUT, this);
+            }
+            // 如果之前存在模态UI, 则将其设置为后一个
+            else
+            {
+                modelWindows.Peek().Value.SetSiblingIndex(2);
+                modelWindows.Push(new KeyValuePair<GameObject, Transform>(go, go.transform.parent));
+            }
+        }
+        /// <summary>
+        /// 无论是建立MessageBox还是SetAsModel, 最后都需要CloseModel
+        /// </summary>
+        public void CloseMultiModel()
+        {
+            var goParent = modelWindows.Peek();
+            if (goParent.Value != null)
+                goParent.Key.transform.SetParent(savedParent);
+            else
+                Destroy(goParent.Key);// 如果没有parent, 说明他是临时新建的..
+            modelWindows.Pop();
+            if (modelWindows.Count == 0)
+            {
+                uiCamera.GetComponent<CameraBlur>().StopBlur();
+                modelCanvas.gameObject.SetActive(false);
+                EventManager.Instance.PostEvent(GameEvent.RESTART_INPUT, this);
+            }
         }
         #endregion
 
