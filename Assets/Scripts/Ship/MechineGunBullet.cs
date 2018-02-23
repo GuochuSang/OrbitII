@@ -51,7 +51,7 @@ namespace ShipProject
 			base.Update();
 			if (shoot)
 			{
-				transform.Translate(transform.up* BulletSpeed * Time.deltaTime);
+				transform.Translate(transform.InverseTransformDirection(transform.up)* BulletSpeed * Time.deltaTime);
 			}
 			lifeTimer += Time.deltaTime;
 			if (lifeTimer >= BulletLifeTime)

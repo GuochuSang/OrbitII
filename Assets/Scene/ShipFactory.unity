@@ -5360,7 +5360,7 @@ MonoBehaviour:
   ButtonPrefab: {fileID: 1692616759233594, guid: 8660210108716d74a97546caf6c2e0dc,
     type: 2}
   Offset: 1007
-  es: {fileID: 2027997736}
+  es: {fileID: 1231753925}
 --- !u!114 &661639469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6738,7 +6738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a89e167eb19457148b79a71c78ef1ad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loader: {fileID: 0}
+  loader: {fileID: 661639468}
 --- !u!1 &887506747
 GameObject:
   m_ObjectHideFlags: 0
@@ -8259,7 +8259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f803427b28af653409c9536958765c56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  txtc: {fileID: 0}
+  txtc: {fileID: 887506749}
 --- !u!1 &1043910696
 GameObject:
   m_ObjectHideFlags: 0

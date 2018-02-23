@@ -9,8 +9,8 @@ namespace ShipProject
 	{
 		public enum GameCamp
 		{
-			player=0,
-			enemy=1
+			Player_=0,
+			Enemy_=1
 		}
 	}
 	/// <summary>

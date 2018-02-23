@@ -20,7 +20,10 @@ namespace ShipProject
 		public void Damage(IAttackable attackable, float value)
 		{
 			if (attackable != null)
+			{
 				attackable.ReceiveDamage(this, value);
+				FinishWork();
+			}
 		}
 
 			public virtual void FinishWork()

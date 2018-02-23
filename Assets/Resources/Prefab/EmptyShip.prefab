@@ -235,11 +235,11 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  MaxSP: 500
+  MaxSP: 1000
   sp: 500
   SpColding: 0
   SpOutColdingRate: 0.14
-  SpRecoverSpeed: 20
+  SpRecoverSpeed: 100
   mode: 0
   resistanceRate: 2
   dashRate: 200

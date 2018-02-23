@@ -9,7 +9,7 @@ namespace ShipProject
 	{
 		public override GameCamp GetCamp()
 		{
-			return GameCamp.enemy;
+			return GameCamp.Enemy_;
 		}
 	}
 }
