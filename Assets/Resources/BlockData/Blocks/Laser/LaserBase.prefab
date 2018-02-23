@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 95944941040005030}
   - component: {fileID: 61985831785576926}
   - component: {fileID: 114742225713039628}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LaserBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4590273663553550}
   - component: {fileID: 212573703773734336}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LaserBaseWork
   m_TagString: Untagged
   m_Icon: {fileID: 0}

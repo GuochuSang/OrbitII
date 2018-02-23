@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4277449969486640}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: hole2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,7 +34,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4363939277855252}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: hole1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +51,7 @@ GameObject:
   - component: {fileID: 4503964875534530}
   - component: {fileID: 114950172918365884}
   - component: {fileID: 114047336261509052}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MechineGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,3 +258,4 @@ MonoBehaviour:
   pos: {x: 0, y: 0}
   ParentShip: {fileID: 0}
   SpriteOnUI: {fileID: 21300000, guid: cda26b2049bba704fb9653b8fb0ba0e4, type: 3}
+  SpriteOnFactory: {fileID: 0}

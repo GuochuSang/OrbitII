@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4685531264577978}
   - component: {fileID: 212955713645253168}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LaserHeadWork
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 95934150992108076}
   - component: {fileID: 61666527916124434}
   - component: {fileID: 114038266965413394}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LaserHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}

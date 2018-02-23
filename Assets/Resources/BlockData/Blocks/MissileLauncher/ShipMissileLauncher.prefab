@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114733710917767462}
   - component: {fileID: 61393297491033940}
   - component: {fileID: 114723253012316118}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShipMissileLauncher
   m_TagString: Untagged
   m_Icon: {fileID: 0}

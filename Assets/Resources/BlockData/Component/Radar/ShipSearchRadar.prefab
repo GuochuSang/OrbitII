@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4764065207292300}
   - component: {fileID: 114346552053063848}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShipSearchRadar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

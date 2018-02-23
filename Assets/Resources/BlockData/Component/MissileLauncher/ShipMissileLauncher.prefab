@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114957122695915914}
   - component: {fileID: 114063446008231044}
   - component: {fileID: 60724974535534002}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShipMissileLauncher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 212976116831030794}
   - component: {fileID: 95342505989809222}
   - component: {fileID: 114003996427217298}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: missileLodaingEffect0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 212926546203423558}
   - component: {fileID: 95078216107216118}
   - component: {fileID: 114796828930960772}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: missileLodaingEffect5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 212193671704484276}
   - component: {fileID: 95050033039911674}
   - component: {fileID: 114326482720909918}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: missileLodaingEffect3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 212656889264470010}
   - component: {fileID: 95623846209515766}
   - component: {fileID: 114609635880297812}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: missileLodaingEffect2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 212547998887690076}
   - component: {fileID: 95806495689749690}
   - component: {fileID: 114131293594439296}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: missileLodaingEffect4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 212734212998657256}
   - component: {fileID: 95627092202592780}
   - component: {fileID: 114570808492309706}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: missileLodaingEffect1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

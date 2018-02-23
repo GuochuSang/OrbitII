@@ -10,8 +10,8 @@ namespace ShipProject.Factory.UI
 	public class LoadShipButton : MonoBehaviour
 	{
 		public GameObject ButtonPrefab;
-		public float Offset;
 		public EventSystem es;
+		public float gap;
 		[Button("LoadButtons")]
 		public void LoadButtons()
 		{
@@ -31,17 +31,16 @@ namespace ShipProject.Factory.UI
 				GameObject buttonObj=Instantiate(ButtonPrefab);
 				buttonObj.transform.SetParent(transform);
 				buttonObj.transform.GetChild(0).GetComponent<Text>().text = names[i];
+				buttonObj.GetComponent<ShipLoaderButton>().index = i;
 			}
 		}
-		public void Update()
+		public void Up()
 		{
-			if(es.currentSelectedGameObject!=null)
-			if (es.currentSelectedGameObject.transform.IsChildOf(transform))
-			{
-				Vector3 p1 = GetComponent<RectTransform>().position;
-				Vector3 p2 = es.currentSelectedGameObject.GetComponent<RectTransform>().position;
-				GetComponent<RectTransform>().position = new Vector3(p1.x,(p1.y-p2.y)+Offset,p1.z);
-			}
+			GetComponent<RectTransform>().pivot += new Vector2(0, gap);
+		}
+		public void Down()
+		{
+			GetComponent<RectTransform>().pivot += new Vector2(0, -gap);
 		}
 	}
 }

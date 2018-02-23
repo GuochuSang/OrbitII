@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212493882035362400}
   - component: {fileID: 331676788344192524}
   - component: {fileID: 95581655231397326}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ATEff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 114814050683756490}
   - component: {fileID: 114210410661417230}
   - component: {fileID: 58537250357602982}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ATS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4599898085021100}
   - component: {fileID: 212339595083354004}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: "\u88C2\u7F1D"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,6 +215,7 @@ MonoBehaviour:
   pos: {x: 0, y: 0}
   ParentShip: {fileID: 0}
   SpriteOnUI: {fileID: 21300000, guid: f768f56a20a19854688f7976db449293, type: 3}
+  SpriteOnFactory: {fileID: 0}
 --- !u!212 &212339595083354004
 SpriteRenderer:
   m_ObjectHideFlags: 1

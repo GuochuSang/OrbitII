@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114084613908606194}
   - component: {fileID: 61260909256991634}
   - component: {fileID: 114139846439840110}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ATDR
   m_TagString: Untagged
   m_Icon: {fileID: 0}

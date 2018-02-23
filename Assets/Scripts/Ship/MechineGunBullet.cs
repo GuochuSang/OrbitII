@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace ShipProject
 {
-	public class MechineGunBullet : RayCastDamage, IBullet
+	public class MechineGunBullet : TriggerDamage, IBullet
 	{
 		public float BulletSpeed;
 		public float BulletLifeTime;
@@ -48,7 +48,6 @@ namespace ShipProject
 		}
 		private void Update()
 		{
-			base.Update();
 			if (shoot)
 			{
 				transform.Translate(transform.InverseTransformDirection(transform.up)* BulletSpeed * Time.deltaTime);

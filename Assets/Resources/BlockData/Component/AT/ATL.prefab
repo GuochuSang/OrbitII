@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4633144415573654}
   - component: {fileID: 95374703359536880}
   - component: {fileID: 114475231363893996}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ATEFF_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 212333778842863486}
   - component: {fileID: 61064935764463948}
   - component: {fileID: 114188637923324724}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ATSHEILD_S4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 212508867601483574}
   - component: {fileID: 61245437712072376}
   - component: {fileID: 114038047037011488}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ATSHEILD_S3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 212464440943047448}
   - component: {fileID: 61393428641591100}
   - component: {fileID: 114065782109515760}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ATSHEILD_S1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 212910035680477420}
   - component: {fileID: 61188545264540370}
   - component: {fileID: 114967325488802806}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ATSHEILD_S2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4735095345769866}
   - component: {fileID: 212747644063214662}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: "\u88C2\u7F1D"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 114667228957291544}
   - component: {fileID: 58125774685866436}
   - component: {fileID: 114166924595823000}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ATL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 224656949211137438}
   - component: {fileID: 212905450682613698}
   - component: {fileID: 331664482196192522}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ATEff_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}

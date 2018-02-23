@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114734500325728248}
   - component: {fileID: 95564404309684968}
   - component: {fileID: 114076468960984890}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShipLaser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4888788008134966}
   - component: {fileID: 212575003713603192}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LaserStartOutside
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 61855708947215246}
   - component: {fileID: 114273196873202924}
   - component: {fileID: 50484278529678764}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LaserGlow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4797177110949606}
   - component: {fileID: 212973508229347620}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LaserStartInside
   m_TagString: Untagged
   m_Icon: {fileID: 0}

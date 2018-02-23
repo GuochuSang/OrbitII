@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4322667440863614}
   - component: {fileID: 114666835065913996}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Lv1Armor 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,3 +110,4 @@ MonoBehaviour:
   pos: {x: 0, y: 0}
   ParentShip: {fileID: 0}
   SpriteOnUI: {fileID: 21300002, guid: e35bc5c4ade556f4c9f433cd6a30a900, type: 3}
+  SpriteOnFactory: {fileID: 0}

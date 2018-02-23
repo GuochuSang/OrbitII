@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4289591466697394}
   - component: {fileID: 212887708076345690}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rader_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4109263560799182}
   - component: {fileID: 212541840643753128}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rader_9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4876228871613698}
   - component: {fileID: 212267169865901876}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rader_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,7 +67,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4862706063682484}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: raderPing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,7 +83,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4793210229302382}
   - component: {fileID: 212717915930621542}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rader_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 114305685911488732}
   - component: {fileID: 61902230260784700}
   - component: {fileID: 114725571023331230}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: radar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4717673519613252}
   - component: {fileID: 212988598909358404}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rader_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4009535253211846}
   - component: {fileID: 212402586956342796}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: raderKuang
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4151651346240428}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: raderDian
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4272479784044020}
   - component: {fileID: 212944734750043908}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rader_8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4930403278254806}
   - component: {fileID: 212912229173158082}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rader_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4669280641326444}
   - component: {fileID: 212293231500982934}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rader_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
