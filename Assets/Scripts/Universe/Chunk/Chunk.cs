@@ -16,6 +16,11 @@ public class Chunk : ISaveable
 
     public ID id; // 对于Chunk来说, 它只会被创建而不会被删除, 所以不需要调用 id.OnDestroy()
     bool enableUpdate = false; // 用于记录Chunk的状态, Chunk自身不能调用自己的Update (就像Monobehavior对象不调用自己的Update)
+    public bool EnableUpdate
+    {
+        get{ return enableUpdate;}
+        private set{ }
+    }
 
     #region 需要储存的数据
     Vector2Int position; // chunk的位置 (单个方块的位置为 position*SIZE+方块在Chunk中的位置*(SIZE/TILE_SIZE))
@@ -168,7 +173,9 @@ public class Chunk : ISaveable
             }
         foreach (IChunkObject child in childObjects)
         {
-            childObjectIDs.Add(child.Save());
+            ID childID = child.Save();
+            if(childID != null)
+                childObjectIDs.Add(childID);
         }
         
 
@@ -203,6 +210,9 @@ public class Chunk : ISaveable
     /// </summary>
     public void EnterUpdate(Tilemap frontTilemap,Tilemap bkTilemap)
     {
+        // 刷新一些东西出来
+        ChunkFlash.Instance.FlashHere(this);
+
         enableUpdate = true;
         foreach (BlockBase block in frontBlocks)
         {

@@ -17,7 +17,6 @@ namespace Universe
             }
         }
 
-        [Range(0f,1f)]
         public float positionMoveSpeed = 10f;
         [Range(0f,1f)]
         public float positionLerpRatio = 0.2f;
@@ -63,7 +62,7 @@ namespace Universe
             Vector3 camPos = translateCameras[0].transform.position;
             //在长期观看一个物体时, 最好不用 Lerp, 否则Camera的移动会出现时快时慢的现象
             //camPos = Vector3.Lerp(camPos, objectTarget.position, positionLerpRatio); 
-            camPos = Vector3.MoveTowards(camPos, objectTarget.position, positionMoveSpeed);
+            camPos = Vector3.MoveTowards(camPos, objectTarget.position, positionMoveSpeed*Time.deltaTime);
             foreach (var cam in translateCameras)
             {
                 cam.transform.position = new Vector3(camPos.x, camPos.y, -10);

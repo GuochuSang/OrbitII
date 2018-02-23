@@ -23,6 +23,7 @@ namespace Manager
             EventManager.Instance.AddListener(this,GameEvent.ENTER_RECORD,OnEnterRecord);
             EventManager.Instance.AddListener(this,GameEvent.EXIT_RECORD_WITH_SAVE,OnExitRecord);
             EventManager.Instance.AddListener(this,GameEvent.ENTER_SHIP_FACTORY,OnEnterShipFactory);
+            EventManager.Instance.AddListener(this, GameEvent.EXIT_SHIP_FACTORY, OnExitRecord);
             Resource.InitElements();
         }
         void OnEnterRecord(GameEvent gameEvent,Component comp,object param = null)
@@ -40,6 +41,10 @@ namespace Manager
         {
             EventManager.Instance.PostEvent(GameEvent.SAVE_GAME, this);
             SceneManager.LoadScene(shipFactoryScene);
+        }
+        void OnExitShipFactory(GameEvent gameEvent,Component comp,object param = null)
+        {
+            SceneManager.LoadScene(gameSceneScene);
         }
     }
 }

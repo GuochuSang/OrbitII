@@ -88,6 +88,7 @@ namespace Manager
         /// </summary>
         public void PostEvent(GameEvent eventType, Component sender, object param = null)
         {
+            Debug.Log("Event : "+eventType.ToString());
             Dictionary<object,OnEvent> listenerList = null;
             if (!listeners.TryGetValue(eventType, out listenerList))
                 return;

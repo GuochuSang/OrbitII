@@ -113,6 +113,11 @@ namespace Universe
                 TabsUI.Instance.CloseTabsUI();
                 itsMenuManager.ExitPanel(this.gameObject);
             }
+            else
+            {
+                currentChoosed = obj;
+                ShowBuildingMessage(obj);
+            }
         }
         #endregion 
     }   
