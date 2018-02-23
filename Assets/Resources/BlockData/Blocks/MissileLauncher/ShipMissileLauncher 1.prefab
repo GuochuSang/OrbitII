@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114658443129104936}
   - component: {fileID: 61225142301855254}
   - component: {fileID: 114937937911191176}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShipMissileLauncher 1
   m_TagString: Respawn
   m_Icon: {fileID: 0}

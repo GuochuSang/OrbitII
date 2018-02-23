@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114034355790596204}
   - component: {fileID: 61861502234949558}
   - component: {fileID: 114459231164951910}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ATUR
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -8,6 +8,7 @@ namespace ShipProject.Factory.UI
 	public class ShipLoaderButton : MonoBehaviour
 	{
 		public Text text;
+		public int index = 0;
 		public void LoadShip()
 		{
 			FactoryListener.Instance.LoadShip(text.text);

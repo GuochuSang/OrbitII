@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using ShipProject.ShipEnum;
 using Sirenix.OdinInspector;
@@ -8,6 +9,7 @@ namespace ShipProject
 {
 	public class BlockHealth : MonoBehaviour, IAttackable,ICamp
 	{
+		public event Action<IDamage, float> OnAttack;
 		public float MaxHealth;
 		private float HealthRate;
 		[ShowInInspector]
@@ -43,6 +45,8 @@ namespace ShipProject
 			{
 				block.ParentShip.CollapseBlockWithRecursion(block.Pos);
 			}
+
+			if (OnAttack != null) OnAttack(damage, damageValue);
 		}
 
 		public GameCamp GetCamp()

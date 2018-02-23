@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114225348562360908}
   - component: {fileID: 61689800158606774}
   - component: {fileID: 114471311871617970}
-  m_Layer: 29
+  m_Layer: 8
   m_Name: ShipThruster
   m_TagString: ShipComponent
   m_Icon: {fileID: 0}

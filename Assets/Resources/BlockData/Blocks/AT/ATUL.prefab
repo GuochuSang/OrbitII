@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114411304284697530}
   - component: {fileID: 61135873683922612}
   - component: {fileID: 114204078813990210}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ATUL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
