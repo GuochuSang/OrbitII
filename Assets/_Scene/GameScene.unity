@@ -4163,6 +4163,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d16b72167b1438141b8625de923b7963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gapSize: 10
+  gridSize: 100
+  evenLineDeltaX: 20
   uiTextPrefab: {fileID: 1878904092321420, guid: 865a4e19b0a373e4abee202de607bcbc,
     type: 2}
   uiGridPrefab: {fileID: 1892699965190336, guid: e15d5fad887ca8543a973528f1d9bb20,

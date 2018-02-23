@@ -8,8 +8,11 @@ namespace Universe
 {
     public class ShowContainer : MonoSingleton<ShowContainer>, ITabsUI
     {
-        const int gapSize = 10;
-        const int gridSize = 40;
+        public int gapSize = 10;// 相邻俩的间隔
+        public int gridSize = 40;// 格子的大小
+        public int evenLineDeltaX = 20;// 偶数行位移
+        const int xGrid = 5;
+        const int yGrid = 5;
 
         public GameObject uiTextPrefab;
         public GameObject uiGridPrefab;
@@ -17,7 +20,6 @@ namespace Universe
         public int buttonSize = 20;
 
         RectTransform[,] grids;
-        RectTransform gridsParent;
         Text[,] gridsText;
         // 添加内容的区域, 从tabsUI获得
         RectTransform tabsUICanvas;
@@ -26,15 +28,15 @@ namespace Universe
         Vector2Int currentSize;
 
         // 打开背包调用一次
-        public void Show(Container box, int xGrid, int yGrid)
+        public void Show(Container box)
         {
             currentBox = box;
             currentSize = new Vector2Int(xGrid, yGrid);
             grids = new RectTransform[xGrid, yGrid];
             gridsText = new Text[xGrid, yGrid];
 
-            int width = xGrid*gridSize + (xGrid+1)*gapSize;
-            int length = yGrid*gridSize + (yGrid+1)*gapSize;
+            //int width = xGrid*gridSize + (xGrid+1)*gapSize;
+            //int length = yGrid*gridSize + (yGrid+1)*gapSize;
 
             //int pageCount = Mathf.CeilToInt((float)box.GetAllItemsCount() / (float)(xGrid * yGrid));
             int pageCount = Mathf.CeilToInt((float)box.GridCount / (float)(xGrid * yGrid));
@@ -45,12 +47,11 @@ namespace Universe
             for (int j = 0; j < yGrid; j++)
                 for (int i = 0; i < xGrid; i++)
                 {
-                    gridsParent = (Instantiate(uiGridPrefab, tabsUICanvas) as GameObject).GetComponent<RectTransform>();
-                    grids[i, j] = gridsParent;
-                    gridsParent.sizeDelta = new Vector2(gridSize, gridSize);
-                    gridsParent.anchoredPosition = new Vector2((i+1)*gapSize+i*gridSize + gridSize/2,-(buttonSize+(j+1)*gapSize+j*gridSize+gridSize/2));
+                    grids[i, j] = (Instantiate(uiGridPrefab, tabsUICanvas) as GameObject).GetComponent<RectTransform>();
+                    // 偶数行X坐标不同
+                    grids[i, j].anchoredPosition = new Vector2( j%2*evenLineDeltaX + (i+1)*gapSize+i*gridSize + gridSize/2,-(buttonSize+(j+1)*gapSize+j*gridSize+gridSize/2));
 
-                    GameObject go = Instantiate(uiTextPrefab,gridsParent) as GameObject;
+                    GameObject go = Instantiate(uiTextPrefab,grids[i, j]) as GameObject;
                     gridsText[i,j] = go.GetComponent<Text>();
                 }
 
@@ -89,7 +90,11 @@ namespace Universe
         }
         public void CloseTabsUI()
         {
-            Destroy(gridsParent.gameObject);
+            for (int j = 0; j < yGrid; j++)
+                for (int i = 0; i < xGrid; i++)
+                {
+                    Destroy(grids[i, j].gameObject);
+                }
             //for (int i = 0; i < currentSize.x; i++)
             //    for (int j = 0; j < currentSize.y; j++)
             //    {
