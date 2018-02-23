@@ -6,7 +6,7 @@ namespace Universe
 {
     public class PlanetUI : MonoSingleton<PlanetUI>
     {
-        // 自由视角, 总览模式, 建筑模式
+        // 自由视角,半自由.., 总览模式, 建筑模式
         public enum WatchState
         {
             FREE,HALF_FREE,LOOK,ENTER
@@ -119,11 +119,12 @@ namespace Universe
         /// <summary>
         /// 退出总览模式, 并不解除各种绑定
         /// </summary>
-        public void ExitLooking(Transform objectToFollow = null)
+        public void ExitLooking()
         {
-            if (objectToFollow == null)
-                objectToFollow = currentShip;
-
+            ExitLooking(currentShip);
+        }
+        public void ExitLooking(Transform objectToFollow)
+        {
             watchState = WatchState.HALF_FREE;
             Instantiate<GameObject>(lookPlanetHUDPrefab,currentShip);
 
@@ -140,6 +141,8 @@ namespace Universe
             CameraController.Instance.SetSize(currentPlanet.Radius);
             LookLandIndex = 0;
             LookBuilding(LookLandIndex);
+
+            EventManager.Instance.PostEvent(GameEvent.ENTER_PLANET, CurrentPlanet);
         }
         public void ExitPlanet()
         {
@@ -150,6 +153,8 @@ namespace Universe
             CameraController.Instance.SetSize(currentPlanet.Radius*3);
             CameraController.Instance.LookAt(currentPlanet.transform);
             CameraController.Instance.SetRotation(Vector3.zero);
+
+            EventManager.Instance.PostEvent(GameEvent.EXIT_PLANET, CurrentPlanet);
         }
 
         public void LeftBuilding()
@@ -250,11 +255,11 @@ namespace Universe
         /// </summary>
         public void New()
         {
-            BuildingBase building = Instantiate<GameObject>(ShipFactory.GetBuildingPrefab(BuildingType.SHIP_FACTORY)).GetComponent<BuildingBase>();
-            Build(building ,LookLandIndex,currentPlanet);
-
-            //BuildingBase building = Instantiate<GameObject>(ResourceCollector.GetBuildingPrefab(BuildingType.RESOURCE_COLLECTOR)).GetComponent<BuildingBase>();
+            //BuildingBase building = Instantiate<GameObject>(ShipFactory.GetBuildingPrefab(BuildingType.SHIP_FACTORY)).GetComponent<BuildingBase>();
             //Build(building ,LookLandIndex,currentPlanet);
+
+            BuildingBase building = Instantiate<GameObject>(ResourceCollector.GetBuildingPrefab(BuildingType.RESOURCE_COLLECTOR)).GetComponent<BuildingBase>();
+            Build(building ,LookLandIndex,currentPlanet);
         }
         /// <summary>
         /// 默认打开当前Building
