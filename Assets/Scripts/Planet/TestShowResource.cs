@@ -32,6 +32,7 @@ namespace Universe
         {
             isOpen = true;
             text.text = "";
+            /*
             foreach (var kv in curPlanet.resources.elementInLands)
             {
                 text.text += kv.Key.ToString() + "\n";
@@ -39,7 +40,14 @@ namespace Universe
                 for (int i = 0; i < kv.Value.Length; i++)
                     text.text += kv.Value[i].ToString("0.0")+"\t\t";
                 text.text += "\n\n"; 
-            }
+            }*/
+            if(curPlanet.colony != null)
+                foreach(var kv in curPlanet.colony.container.Items)
+                {
+                    text.text += kv.Key.ToString() + " : ";
+                    text.text += kv.Value + " \n";
+                    text.text += "\n\n"; 
+                }
         }
         void Close()
         {

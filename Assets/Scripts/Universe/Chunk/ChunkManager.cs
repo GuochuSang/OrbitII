@@ -68,6 +68,7 @@ namespace Universe
         void OnDestroy()
         {
             EventManager.Instance.RemoveObjectEvent(this, GameEvent.SAVE_GAME);
+            id.OnDestroy();
         }
 
 
