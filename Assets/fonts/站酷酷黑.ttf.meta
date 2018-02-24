@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 000ba3518f9e9dd43990039d89f5df0f
+timeCreated: 1519423886
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: HuXiaoBo_KuHei
+  fontNames:
+  - HuXiaoBo_KuHei
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
