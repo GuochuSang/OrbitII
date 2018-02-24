@@ -16,8 +16,10 @@ namespace Universe
                 defaultFreeSize = Mathf.Clamp(value, cameraSizeLimit.x, cameraSizeLimit.y);
             }
         }
-
-        public float positionMoveSpeed = 10f;
+        [Header("镜头速度会因为距离增大而增大")]
+        public float positionMoveSpeed = 60f;
+        // 速度增大量 = 距离*positionMoveSpeedRatio
+        public float positionMoveSpeedRatio = 0.1f;
         [Range(0f,1f)]
         public float positionLerpRatio = 0.2f;
         [Range(0f,1f)]
@@ -60,9 +62,9 @@ namespace Universe
         void LookAtTarget()
         {
             Vector3 camPos = translateCameras[0].transform.position;
-            //在长期观看一个物体时, 最好不用 Lerp, 否则Camera的移动会出现时快时慢的现象
-            //camPos = Vector3.Lerp(camPos, objectTarget.position, positionLerpRatio); 
-            camPos = Vector3.MoveTowards(camPos, objectTarget.position, positionMoveSpeed*Time.deltaTime);
+            float chasingSpeed = positionMoveSpeed + (camPos - objectTarget.position).sqrMagnitude*positionMoveSpeedRatio;
+
+            camPos = Vector3.MoveTowards(camPos, objectTarget.position, chasingSpeed*Time.deltaTime);
             foreach (var cam in translateCameras)
             {
                 cam.transform.position = new Vector3(camPos.x, camPos.y, -10);
