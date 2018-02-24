@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using ShipProject.ShipEnum;
+using ShipSeriazble;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -37,6 +38,7 @@ namespace ShipProject
 		{
 			block = GetComponent<Block>();
 			healthRate = 1f;
+			block.ParentShip.serializeShip.data.blockHealthData.Add(new SerializableVector2Int(block.Pos),new BlockHealthData(healthRate));
 		}
 		public void ReceiveDamage(IDamage damage, float damageValue)
 		{
@@ -45,7 +47,7 @@ namespace ShipProject
 			{
 				block.ParentShip.CollapseBlockWithRecursion(block.Pos);
 			}
-
+			block.ParentShip.serializeShip.data.blockHealthData[new SerializableVector2Int(block.Pos)].health = healthRate;
 			if (OnAttack != null) OnAttack(damage, damageValue);
 		}
 

@@ -56,6 +56,8 @@ GameObject:
   - component: {fileID: 50921502510568654}
   - component: {fileID: 114372670831562710}
   - component: {fileID: 58442347156616948}
+  - component: {fileID: 114174738210999316}
+  - component: {fileID: 114766618732825934}
   m_Layer: 0
   m_Name: EmptyShip
   m_TagString: Untagged
@@ -186,6 +188,22 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114174738210999316
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1370539143124814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 076c71872dfa7e94d89560909633feee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkRadius: 5
+  planetLayerMask: 1
+  buildingLayerMask: 1
+  planetTag: Planet
+  controlCenterTag: ControlCenter
 --- !u!114 &114372670831562710
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -199,6 +217,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShipLock: {fileID: 95052067159143884}
   ship: {fileID: 0}
+--- !u!114 &114766618732825934
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1370539143124814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6df8477672057342b863256a023b9ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    shipName: 
+    shipCamp: 0
+    Sp: 0
+    isColding: 0
+    mode: 0
 --- !u!114 &114931961866672392
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -263,6 +298,8 @@ MonoBehaviour:
   WhiteListPos: []
   BlackListPos: []
   core: {fileID: 0}
+  control: {fileID: 0}
+  serializeShip: {fileID: 0}
   id: 0
   level: 1
   rotation: 0

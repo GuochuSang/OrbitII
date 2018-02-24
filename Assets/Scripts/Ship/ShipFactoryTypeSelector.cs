@@ -19,9 +19,15 @@ namespace ShipProject.Factory
 		public Text toggleText;
 		public Toggle toggle;
 		public EventSystem es;
+		public bool KBSeletcable=true;
 		public void Start()
 		{
 			toggles = toggleGroup.ActiveToggles();
+		}
+
+		public void SetKBState(bool value)
+		{
+			KBSeletcable = value;
 		}
 		public void Update()
 		{
@@ -34,7 +40,7 @@ namespace ShipProject.Factory
 				}
 			}
 
-			if (Input.GetButtonDown(RB))
+			if (Input.GetButtonDown(RB)&& KBSeletcable)
 			{
 				toggleGroup.SetAllTogglesOff();
 				if (((ComponentTypeSelectToggle) toggle).rightToggle != null)
@@ -44,7 +50,7 @@ namespace ShipProject.Factory
 						.transform.GetChild(0).gameObject);
 				}
 			}
-			if (Input.GetButtonDown(LB))
+			if (Input.GetButtonDown(LB)&& KBSeletcable)
 			{
 				toggleGroup.SetAllTogglesOff();
 				if ((toggle as ComponentTypeSelectToggle).leftToggle != null)

@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 using S.Serialize;
 using ShipProject.ShipEnum;
+using ShipSeriazble;
 using Sirenix.OdinInspector;
 using UnityEngine;
 namespace ShipProject
@@ -25,9 +26,8 @@ namespace ShipProject
 				instance = this;
 			}
 			public static string ShipPath;
-			public Ship LoadShipAtTransform(string shipName, Transform theTransform,GameCamp camp)
+			public Ship LoadShipAtTransform(string shipName, Transform theTransform,GameCamp camp,ShipControlMode mode=ShipControlMode.Building)
 			{
-				Debug.Log(camp.ToString() + shipName);
 				byte[] shipBytes = SerializeHelp.ReadFile(Application.dataPath + "/Resources/Ship/"+camp.ToString()+ shipName + ".ship");
 				ShipData shipData = SerializeHelp.ReadObjectData<ShipData>(shipBytes);
 				GameObject shipObject = Instantiate(EmptyShip, theTransform.position, theTransform.rotation);
@@ -39,10 +39,45 @@ namespace ShipProject
 						(ShipEnum.ShipUnitRotation)Enum.ToObject(typeof(ShipEnum.ShipUnitRotation), component.rotation),
 						(ShipEnum.ShipUnitMirror)Enum.ToObject(typeof(ShipEnum.ShipUnitMirror), component.mirror));
 				}
-
 				ship.SetCamp(camp);
+				ShipManager.Instance.ships[camp].Add(ship);
+				ship.control.mode = mode;
 				return ship;
 			}
+
+			public Ship LoadShipWithData(SerializeShipData data)
+			{
+				byte[] shipBytes = SerializeHelp.ReadFile(Application.dataPath + "/Resources/Ship/" + data.shipCamp.ToString() + data.shipName + ".ship");
+				ShipData shipData = SerializeHelp.ReadObjectData<ShipData>(shipBytes);
+				GameObject shipObject = Instantiate(EmptyShip, (Vector3)data.position, Quaternion.Euler((Vector3)data.rotation));
+				Ship ship = shipObject.GetComponent<Ship>();
+				ship.ShipName = ship.name = shipData.ShipName;
+				foreach (var component in shipData.Records)
+				{
+					ship.AddComponent(component.id, component.level, new Vector2Int((int)component.pos.x, (int)component.pos.y),
+						(ShipEnum.ShipUnitRotation)Enum.ToObject(typeof(ShipEnum.ShipUnitRotation), component.rotation),
+						(ShipEnum.ShipUnitMirror)Enum.ToObject(typeof(ShipEnum.ShipUnitMirror), component.mirror));
+				}
+				ship.SetCamp(data.shipCamp);
+				foreach (Block block in ship.Blocks.Values)
+				{
+					BlockHealth health = block.GetComponent<BlockHealth>();
+					if (health != null)
+					{
+						health.ReceiveDamage(null, data.blockHealthData[(SerializableVector2Int)block.Pos].health);
+					}
+				}
+				Debug.Log("debug太多免得我看不见所以才打这一行字"+data.mode.ToString());
+				ship.control.mode = data.mode;
+				Debug.Assert(ShipManager.Instance.enabled);
+				ship.control.Sp = data.Sp;
+				Debug.Assert(ShipManager.Instance.enabled);
+				ship.control.SpColding = data.isColding;
+				Debug.Assert(ShipManager.Instance.enabled);
+				ShipManager.Instance.ships[data.shipCamp].Add(ship);
+				Debug.Assert(ShipManager.Instance.enabled);
+				return ship;
+		}
 			public void SaveShip(Ship ship,GameCamp camp)
 			{
 				List<ShipData.PlaceRecord> records = new List<ShipData.PlaceRecord>();
@@ -62,7 +97,6 @@ namespace ShipProject
 
 			public Dictionary<GameCamp, List<string>> ShipNames = new Dictionary<GameCamp, List<string>>();
 			public void ListShipName(string path,GameCamp camp)
-
 			{
 				//获取指定文件夹的所有文件  
 				string[] paths = Directory.GetFiles(path);

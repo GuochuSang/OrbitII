@@ -120,7 +120,21 @@ namespace ShipProject
 		/// <summary>
 		/// 方块改变事件
 		/// </summary>
-		public event Action<int> BlocksChanged; 
+		public event Action<int> BlocksChanged;
+		/// <summary>
+		/// 飞船控制器
+		/// </summary>
+		public ShipControl control;
+
+		/// <summary>
+		/// 飞船序列化数据管理器
+		/// </summary>
+		public SerializeShip serializeShip;
+		public void Awake()
+		{
+			control = GetComponent<ShipControl>();
+			serializeShip = GetComponent<SerializeShip>();
+		}
 		/// <summary>
 		///     在飞船坐标pos上添加某ID的方块
 		/// </summary>
@@ -179,7 +193,7 @@ namespace ShipProject
 
 			if (block.PosTransWithComponent)
 			{
-				blockTransform.rotation = Quaternion.Euler(rot);
+				blockTransform.rotation = Quaternion.Euler(rot)*transform.rotation;
 			}
 			block.Rotation = rotation;
 			block.Mirror = mirror;

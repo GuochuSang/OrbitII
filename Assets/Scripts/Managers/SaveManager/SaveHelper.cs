@@ -36,7 +36,27 @@ public class Vector3Data
         z = vec.z;
         return this;
     }
-}
+    public static explicit operator Vector3(Vector3Data svec)
+	{
+			Vector3 vec3 = new Vector3
+			{
+				x = svec.x,
+				y = svec.y,
+				z = svec.z
+		};
+		return vec3;
+	}
+	public static explicit operator Vector3Data(Vector3 svec)
+	{
+		Vector3Data vec3 = new Vector3Data
+		{
+			x = svec.x,
+			y = svec.y,
+			z = svec.z
+		};
+		return vec3;
+	}
+	}
 [System.Serializable]
 public class Vector2IntData
 {

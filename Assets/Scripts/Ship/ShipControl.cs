@@ -5,6 +5,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using System.Linq;
 using ShipProject.ShipEnum;
+using Universe;
 
 namespace ShipProject
 {
@@ -13,6 +14,7 @@ namespace ShipProject
 		/// <summary>
 		/// 控制行为模式枚举
 		/// </summary>
+		/// 		[System.Serializable]
 		public enum ShipControlMode
 		{
 			Building=0,
@@ -334,6 +336,14 @@ namespace ShipProject
 							weapon.End();
 						}
 					}
+			#endregion
+			#region 镜头
+			float deltaScroll = Input.GetAxis("Mouse ScrollWheel");
+			if (!deltaScroll.Equals(0f))
+			{
+				CameraController.Instance.DefaultFreeSize -= Input.GetAxis("Mouse ScrollWheel") * 20;
+				CameraController.Instance.SetSize(CameraController.Instance.DefaultFreeSize);
+			}
 			#endregion
 		}
 

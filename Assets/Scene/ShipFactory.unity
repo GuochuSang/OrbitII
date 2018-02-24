@@ -6819,6 +6819,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loader: {fileID: 661639468}
+  selector: {fileID: 0}
 --- !u!1 &887506747
 GameObject:
   m_ObjectHideFlags: 0
@@ -9304,7 +9305,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a89e167eb19457148b79a71c78ef1ad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loader: {fileID: 0}
+  loader: {fileID: 661639468}
+  selector: {fileID: 1438278189}
 --- !u!114 &1134589530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12350,6 +12352,7 @@ MonoBehaviour:
   toggleText: {fileID: 453630218}
   toggle: {fileID: 0}
   es: {fileID: 1231753925}
+  KBSeletcable: 1
 --- !u!114 &1438278190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13353,6 +13356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   a1: {fileID: 881987764}
   a2: {fileID: 1134589528}
+  selector: {fileID: 0}
 --- !u!1 &1540645764
 GameObject:
   m_ObjectHideFlags: 0

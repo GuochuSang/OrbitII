@@ -7,6 +7,7 @@ namespace ShipProject
 {
 	namespace ShipEnum
 	{
+		[System.Serializable]
 		public enum GameCamp
 		{
 			Player_=0,
