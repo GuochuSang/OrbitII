@@ -26,7 +26,7 @@ namespace Universe
         }
         public void FlashHere(Chunk chunk)
         {
-           // StartCoroutine(FlashCoroutine(chunk));
+            StartCoroutine(FlashCoroutine(chunk));
         }
         IEnumerator FlashCoroutine(Chunk chunk)
         {

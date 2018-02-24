@@ -347,7 +347,7 @@ namespace Universe
                 Texture2D temp;
                 if (firstIndex > secondIndex)
                 {
-                    temp = PlanetGenerateHelper.Instance.PixelRotate(transSprite.texture, 360 - (index + 1) * areaAngle, true);
+                    temp = PlanetGenerateHelper.Instance.PixelRotate(transSprite.texture,  (index + 1) * areaAngle, true);
                     targetLand = PlanetGenerateHelper.Instance.Merge(temp, targetLand);
                 }
                 else

@@ -142,6 +142,7 @@ namespace Universe
             LookLandIndex = 0;
             LookBuilding(LookLandIndex);
 
+            EventManager.Instance.PostEvent(GameEvent.SHIP_STOP_INPUT, this);
             EventManager.Instance.PostEvent(GameEvent.ENTER_PLANET, CurrentPlanet);
         }
         public void ExitPlanet()
@@ -154,6 +155,7 @@ namespace Universe
             CameraController.Instance.LookAt(currentPlanet.transform);
             CameraController.Instance.SetRotation(Vector3.zero);
 
+            EventManager.Instance.PostEvent(GameEvent.SHIP_RESTART_INPUT, this);
             EventManager.Instance.PostEvent(GameEvent.EXIT_PLANET, CurrentPlanet);
         }
 
@@ -238,7 +240,6 @@ namespace Universe
 
             // 将建筑建造到殖民地
             planetToBuild.colony.SetBuildingAtIndex(index,building);
-
             if (isCurrent)
             {
                 currentBuilding = building;

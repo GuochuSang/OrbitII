@@ -43,16 +43,7 @@
                 v2f o;
                 o.pos = UnityObjectToClipPos(v.vertex);
 
-                // o.uv = v.texcoord.xy;
-                if(_IsFlip == 1)
-                {
-                	o.uv.x = 1-v.texcoord.x;
-                }
-                else 
-                {
-                	o.uv.x = v.texcoord.x;
-                }
-                o.uv.y = v.texcoord.y;
+                o.uv.xy = v.texcoord.xy;
 
                 return o;
             }
@@ -72,7 +63,11 @@
             	float2 delta = i.uv - pixelCount*pixelSize;
             	i.uv -= delta;
             	float2 uvAfterRotate = mul(rotateMat, i.uv-float2(0.5f,0.5f))+float2(0.5f,0.5f);
-            	float4 oColor = tex2D(_MainTex, uvAfterRotate);
+            	float4 oColor;
+            	if(_IsFlip == 1)
+            		oColor = tex2D(_MainTex, float2(1-uvAfterRotate.x,uvAfterRotate.y));
+        		else
+        			oColor = tex2D(_MainTex, uvAfterRotate);
         		return oColor;
             }
             ENDCG

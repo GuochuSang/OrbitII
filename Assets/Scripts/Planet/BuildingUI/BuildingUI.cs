@@ -15,7 +15,7 @@ namespace Universe
         {
             Debug.Log("Open"+building.Type);
             if (building.Type == BuildingType.CONTROL_CENTER)
-                ShowContainer.Instance.Show(building.momColony.container, 7, 7);
+                ShowContainer.Instance.Show(building.momColony.container);
             else if (building.Type == BuildingType.RESOURCE_COLLECTOR)
                 resourceCollectUI.SetActive(true);
             else if (building.Type == BuildingType.SHIP_FACTORY)
