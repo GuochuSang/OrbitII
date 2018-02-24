@@ -32,6 +32,4 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
-Assets/Scripts/Camera/Sky/Sky.mat
-*.mat
-Assets/Scripts/Camera/Sky/Sky.mat
+Assets/Resources/GameData/saves/1/save_data.dat
