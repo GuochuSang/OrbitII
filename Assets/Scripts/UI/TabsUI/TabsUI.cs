@@ -46,7 +46,7 @@ namespace Universe
         ITabsUI tabsUI = null;
         int pageCount = 0;
         public int currentPage = 1; 
-        bool startShowPage = false;
+        //bool startShowPage = false;
 
         void Start()
         {
@@ -96,15 +96,16 @@ namespace Universe
                     allPageButtons[i].gameObject.SetActive(false);
             }
             // 设置导航!
+            // 算了不应该设置导航, 要么鼠标点击, 要么QE切换页面
             for (int i = 0; i < pageCount; i++)
             {
                 currentObjToButton.Add(currentPageButtons[i].gameObject, currentPageButtons[i]);
                 var btn = currentPageButtons[i];
 
                 Navigation navigation = btn.navigation;
-                navigation.mode = Navigation.Mode.Explicit;
-                navigation.selectOnLeft = currentPageButtons[((i - 1) + pageCount) % pageCount];
-                navigation.selectOnRight = currentPageButtons[(i + 1) % pageCount];
+                navigation.mode = Navigation.Mode.None;
+                //navigation.selectOnLeft = currentPageButtons[((i - 1) + pageCount) % pageCount];
+                //navigation.selectOnRight = currentPageButtons[(i + 1) % pageCount];
                 btn.navigation = navigation;
             }
             this.tabsUI = tabsUI;
@@ -116,39 +117,43 @@ namespace Universe
         }
         public void CloseTabsUI()
         {
-            StopCoroutine(CheckCurrentSelect());
+            //StopCoroutine(CheckCurrentSelect());
             tabsUI.CloseTabsUI();
             tabsUI = null;
             pageCount = 0;
             currentPage = 1; 
             UIManager.Instance.CloseModel();
             tabsUICanvas.gameObject.SetActive(false);
-            startShowPage = false;
+            //startShowPage = false;
             currentPageButtons = null;
             currentObjToButton = null;
         }
         public void Next()
         {
-            ShowPage(currentPage + 1);
+            if(tabsUI!=null)
+                ShowPage(currentPage + 1);
         }
         public void Prev()
         {
-            ShowPage(currentPage - 1);
+            if(tabsUI!=null)
+                ShowPage(currentPage - 1);
         }
         public void ShowPage(int page)
         {
-            if (!startShowPage)
-                StartCoroutine(CheckCurrentSelect());
+            //if (!startShowPage)
+            //    StartCoroutine(CheckCurrentSelect());
             if (page == 0)
                 page = pageCount;
             else if (page == pageCount+1)
                 page = 1;
+            SwapButtonTexture(currentPageButtons[page-1].gameObject);
             currentPage = page;
             tabsUI.ShowPage(page);
             Debug.Log("Show " + page);
             UIManager.Instance.SetSelected(allPageButtons[page - 1].gameObject);
             EventSystem.current.SetSelectedGameObject(allPageButtons[page-1].gameObject);
         }
+        /*
         // 检查当前选中, 切换页面
         IEnumerator CheckCurrentSelect()
         {
@@ -169,6 +174,7 @@ namespace Universe
                 yield return null;
             }
         }
+        */
         // 改变'按钮'图片
         void SwapButtonTexture(GameObject currentChoosedButton)
         {
