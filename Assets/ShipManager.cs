@@ -116,6 +116,7 @@ namespace ShipProject
 		{
 			var shipData = (ShipManagerData) data;
 			isNewGameWithNewShip = shipData.isNewGameWithNewShip;
+			if(shipData.shipDatas.Count>0)
 			for (int i = shipData.shipDatas.Count - 1; i > -1; i--)
 			{
 				ShipFactory.instance.LoadShipWithData(shipData.shipDatas[i]);

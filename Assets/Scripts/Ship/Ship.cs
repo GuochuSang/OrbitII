@@ -193,7 +193,7 @@ namespace ShipProject
 
 			if (block.PosTransWithComponent)
 			{
-				blockTransform.rotation = Quaternion.Euler(rot)*transform.rotation;
+				blockTransform.localRotation = Quaternion.Euler(rot);
 			}
 			block.Rotation = rotation;
 			block.Mirror = mirror;
@@ -374,7 +374,7 @@ namespace ShipProject
 					rot.z = 270;
 					break;
 			}
-			componentTransform.rotation = Quaternion.Euler(rot);
+			componentTransform.localRotation = Quaternion.Euler(rot);
 			shipComponent.ParentShip = this;
 			shipComponent.pos = pos;
 			shipComponent.Rotation = rotation;
