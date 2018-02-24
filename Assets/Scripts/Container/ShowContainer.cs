@@ -16,16 +16,21 @@ namespace Universe
 
         public GameObject uiTextPrefab;
         public GameObject uiGridPrefab;
+        public GameObject uiItemInfoPrefab;// 物品信息UI
 
         public int buttonSize = 20;
 
         RectTransform[,] grids;
         Text[,] gridsText;
+        Dictionary<Vector2Int,OneGrid> oneGrids;
         // 添加内容的区域, 从tabsUI获得
         RectTransform tabsUICanvas;
+        Text uiItemInfoText;
 
         Container currentBox;
         Vector2Int currentSize;
+        OneGrid currentOneGrid;
+        int currentPage;
 
         // 打开背包调用一次
         public void Show(Container box)
@@ -34,6 +39,7 @@ namespace Universe
             currentSize = new Vector2Int(xGrid, yGrid);
             grids = new RectTransform[xGrid, yGrid];
             gridsText = new Text[xGrid, yGrid];
+            oneGrids = new Dictionary<Vector2Int, OneGrid>();
 
             //int width = xGrid*gridSize + (xGrid+1)*gapSize;
             //int length = yGrid*gridSize + (yGrid+1)*gapSize;
@@ -51,9 +57,14 @@ namespace Universe
                     // 偶数行X坐标不同
                     grids[i, j].anchoredPosition = new Vector2( j%2*evenLineDeltaX + (i+1)*gapSize+i*gridSize + gridSize/2,-(buttonSize+(j+1)*gapSize+j*gridSize+gridSize/2));
 
+                    OneGrid one = grids[i, j].GetComponent<OneGrid>();
+                    one.pos = new Vector2Int(i, j);
+                    oneGrids.Add(new Vector2Int(i,j),one);
+
                     GameObject go = Instantiate(uiTextPrefab,grids[i, j]) as GameObject;
                     gridsText[i,j] = go.GetComponent<Text>();
                 }
+            uiItemInfoText = Instantiate<GameObject>(uiItemInfoPrefab, tabsUICanvas).GetComponentInChildren<Text>();
 
             TabsUI.Instance.ShowPage(1);
             StartCoroutine(UpdatePage());
@@ -71,7 +82,6 @@ namespace Universe
         public void ShowPage(int page)
         {
             InitPage();
-
             // 当前需要显示的物品是第几个格子
             int pageIndex = 1;
             // 当前页需要显示的第一个格子是整体的第几个格子
@@ -87,6 +97,9 @@ namespace Universe
                 if (pageIndex > currentSize.x * currentSize.y)
                     break;
             }
+            if(currentPage != page)
+                ShowGrid(oneGrids[new Vector2Int(0, 0)]);
+            currentPage = page;
         }
         public void CloseTabsUI()
         {
@@ -104,9 +117,25 @@ namespace Universe
             gridsText = null;
             tabsUICanvas = null;
             currentBox = null;
+            oneGrids = null;
             currentSize = Vector2Int.zero;
         }
-
+        // 选择高亮某个位置
+        public void ShowGrid(OneGrid grid)
+        {
+            if (grid.gameObject.activeInHierarchy == false)
+                return;
+            if (currentOneGrid != null)
+                currentOneGrid.DeHighlightThis();
+            grid.HighlightThis();
+            currentOneGrid = grid;
+            ShowItemInfo(grid.pos.x,grid.pos.y);
+        }
+        // 显示某个位置物品信息
+        void ShowItemInfo(int x,int y)
+        {
+            uiItemInfoText.text = gridsText[x,y].text;
+        }
         // 开始时隐藏所有grid
         void InitPage()
         {
@@ -163,6 +192,42 @@ namespace Universe
             int yPos = pageIndex / currentSize.x;
             grids[xPos, yPos].gameObject.SetActive(true);
             gridsText[xPos,yPos].text = item + "\n" + amount.ToString();
+        }
+
+        // 键盘控制
+        public void UpGrid()
+        {
+            if (currentBox == null)
+                return;
+            Vector2Int newPos = ClampGridPos(currentOneGrid.pos.x,currentOneGrid.pos.y - 1); 
+            ShowGrid(oneGrids[newPos]);
+        }
+        public void DownGrid()
+        {
+            if (currentBox == null)
+                return;
+            Vector2Int newPos = ClampGridPos(currentOneGrid.pos.x,currentOneGrid.pos.y + 1); 
+            ShowGrid(oneGrids[newPos]);
+        }
+        public void LeftGrid()
+        {
+            if (currentBox == null)
+                return;
+            Vector2Int newPos = ClampGridPos(currentOneGrid.pos.x - 1,currentOneGrid.pos.y); 
+            ShowGrid(oneGrids[newPos]);
+        }
+        public void RightGrid()
+        {
+            if (currentBox == null)
+                return;
+            Vector2Int newPos = ClampGridPos(currentOneGrid.pos.x + 1,currentOneGrid.pos.y); 
+            ShowGrid(oneGrids[newPos]);
+        }
+        Vector2Int ClampGridPos(int x,int y)
+        {
+            x = Mathf.Clamp(x, 0, xGrid - 1);
+            y = Mathf.Clamp(y, 0, yGrid - 1);
+            return new Vector2Int(x, y);
         }
     }
 }

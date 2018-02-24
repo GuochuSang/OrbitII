@@ -28,6 +28,9 @@ namespace Universe
         {
             return buildingName;
         }
+
+        List<string> anchoredShips = new List<string>();
+
     	void Awake () 
         {
             gameObject.tag = "ControlCenter";
