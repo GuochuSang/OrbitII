@@ -13,7 +13,7 @@ public class Container : ISaveable
         WATER, MONEY,
     }
 
-    public const int GRID_SIZE = 99;// 每格最大数量
+    public const int GRID_SIZE = 10;// 每格最大数量
 
     ID id;
 
@@ -129,7 +129,9 @@ public class Container : ISaveable
         // 剩余的空格子
         amountCanAdd += (gridCount - GetAllItemsCount())*GRID_SIZE;
         // 当前没装满的格子
-        amountCanAdd += items[item] - (Mathf.Floor(items[item]/GRID_SIZE))*GRID_SIZE;
+            amountCanAdd += (Mathf.Ceil(items[item]/(float)GRID_SIZE))*GRID_SIZE- items[item];
+            if (amountCanAdd < 0)
+                Debug.Log("GridC : " + gridCount + "\n ALl Count : "+GetAllItemsCount() + "\nAmountCanAdd : "+amountCanAdd+"\nItemAmount :"+items[item] );    
         if (amountCanAdd > amount)
         {
             items[item] += amount;
@@ -181,10 +183,7 @@ public class Container : ISaveable
     public int GetItemCount(string item)
     {
         float countf = items[item] / (float)GRID_SIZE;
-        int count = Mathf.FloorToInt(countf);
-        float delta = countf - (float)count;
-        if (!delta.Equals(0))
-            count++;
+        int count = Mathf.CeilToInt(countf);
         return count;
     }
 }
